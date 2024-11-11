@@ -11,14 +11,14 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.amber,
-        centerTitle: true,
-        title: const Text(
-          "Profile",
-          textAlign: TextAlign.center,
+        body: Column(
+      children: [
+        SwitchListTile(
+          title: const Text("Theme"),
+          value: false,
+          onChanged: (value) {},
         ),
-      ),
-    );
+      ],
+    ));
   }
 }
