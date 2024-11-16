@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spare_ease/pages/loginNsignup/components/login_signup_buttons.dart';
+import 'package:spare_ease/pages/loginNsignup/signup.dart';
+import 'package:spare_ease/pages/loginNsignup/components/custom_text_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -35,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.only(
+              padding: const EdgeInsets.only(
                 top: 200,
                 left: 24.8,
                 bottom: 24.8,
@@ -44,13 +46,13 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
+                  const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "Welcome Back",
                         textAlign: TextAlign.center,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.black,
                           fontSize: 40,
                           fontFamily: 'Plus Jakarta Sans',
@@ -59,34 +61,26 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 50),
+                  const SizedBox(height: 50),
                   Form(
                     child: Column(
                       children: [
-                        TextFormField(
+                        CustomTextField(
+                          label: "Email Address",
                           keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            labelText: "Email Address",
-                            filled: true,
-                            fillColor: Color(0xFFF7C910),
-                          ),
                         ),
-                        SizedBox(height: 16),
-                        TextFormField(
+                        const SizedBox(height: 16),
+                        CustomTextField(
+                          label: "Password",
                           keyboardType: TextInputType.text,
                           obscureText: _obscureText,
-                          decoration: InputDecoration(
-                            labelText: "Password",
-                            filled: true,
-                            fillColor: Color(0xFFF7C910),
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                _obscureText
-                                    ? Icons.visibility_off
-                                    : Icons.visibility,
-                                color: Colors.black,
-                              ),
-                              onPressed: _togglePasswordVisibility,
+                          suffixIcon: InkWell(
+                            onTap: _togglePasswordVisibility,
+                            child: Icon(
+                              _obscureText
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              color: Colors.black54,
                             ),
                           ),
                         ),
@@ -110,6 +104,11 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ],
                             ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
                             TextButton(
                               onPressed: () {},
                               child: const Text(
@@ -121,12 +120,12 @@ class _LoginPageState extends State<LoginPage> {
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
-                            )
+                            ),
                           ],
                         ),
-                        SizedBox(height: 16),
-                        LoginButton(),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
+                        const LoginButton(),
+                        const SizedBox(height: 16),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -140,7 +139,14 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const SignupPage(),
+                                  ),
+                                );
+                              },
                               child: const Text(
                                 "Register",
                                 style: TextStyle(

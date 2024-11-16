@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:spare_ease/pages/loginNsignup/components/login_signup_buttons.dart';
 import 'package:spare_ease/pages/loginNsignup/login.dart';
-import 'package:spare_ease/pages/loginNsignup/signup1.dart';
+import 'package:spare_ease/pages/loginNsignup/signup.dart';
 import 'package:spare_ease/pages/onboarding_screen/intro1.dart';
 import 'package:spare_ease/pages/onboarding_screen/intro2.dart';
 

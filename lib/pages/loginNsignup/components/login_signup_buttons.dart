@@ -90,7 +90,7 @@ class LoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -132,32 +132,35 @@ class SignupButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: const Color.fromRGBO(75, 62, 53, 1),
-        elevation: 0,
-        side: const BorderSide(
-          width: 1,
-          color: Color.fromRGBO(75, 62, 53, 1),
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color.fromRGBO(75, 62, 53, 1),
+          elevation: 0,
+          side: const BorderSide(
+            width: 1,
+            color: Color.fromRGBO(75, 62, 53, 1),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          padding: const EdgeInsets.all(8),
+          textStyle: const TextStyle(
+            fontFamily: 'Plus Jakarta Sans',
+            fontWeight: FontWeight.w600,
+            fontSize: 18,
+            color: Color.fromARGB(255, 255, 255, 255),
+          ),
         ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        padding: const EdgeInsets.all(8),
-        textStyle: const TextStyle(
-          fontFamily: 'Plus Jakarta Sans',
-          fontWeight: FontWeight.w600,
-          fontSize: 18,
-          color: Color.fromARGB(255, 255, 255, 255),
-        ),
-      ),
-      onPressed: _signupButtonFunctionality,
-      child: const Text(
-        'Register',
-        style: TextStyle(
-          color: Color.fromARGB(255, 255, 255, 255),
-          fontSize: 18,
-          fontWeight: FontWeight.w600,
+        onPressed: _signupButtonFunctionality,
+        child: const Text(
+          'Register',
+          style: TextStyle(
+            color: Color.fromARGB(255, 255, 255, 255),
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
     );
