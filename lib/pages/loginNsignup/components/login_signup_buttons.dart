@@ -89,8 +89,6 @@ class LoginSignupButtons extends StatelessWidget {
 class LoginButton extends StatelessWidget {
   const LoginButton({super.key});
 
-  Future<void> _loginButtonFunctionality(BuildContext context) async {}
-
   @override
   Widget build(BuildContext context) {
     final LoginController controller = Get.find<LoginController>();
@@ -157,7 +155,7 @@ class SignupButton extends StatelessWidget {
             color: Color.fromARGB(255, 255, 255, 255),
           ),
         ),
-        onPressed: () => controller.signup(context),
+        onPressed: () => controller.signup(),
         child: controller.isLoading.value
             ? const CircularProgressIndicator(color: Colors.white)
             : const Text(

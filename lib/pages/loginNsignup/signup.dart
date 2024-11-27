@@ -7,7 +7,7 @@ import 'package:spare_ease/pages/loginNsignup/login.dart';
 import 'package:get/get.dart';
 
 class SignupPage extends StatefulWidget {
-  static const routName = "/RegisterScreen";
+  static const routName = "/SignupPage";
 
   const SignupPage({super.key});
 

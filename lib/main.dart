@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:spare_ease/pages/home.dart';
+import 'package:spare_ease/pages/my_bottom_navigation_bar.dart';
 import 'package:spare_ease/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -13,7 +15,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: SplashScreen(),
+      home: MyBottomNavigationBar(),
+      //home: SplashScreen(),
     );
   }
 }

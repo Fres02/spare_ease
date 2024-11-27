@@ -7,7 +7,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 class SignupController extends GetxController {
   static SignupController get instance => Get.find();
 
-  // Controllers for text fields
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
@@ -16,7 +15,6 @@ class SignupController extends GetxController {
   final addressController = TextEditingController();
   final contactNumberController = TextEditingController();
 
-  // Focus nodes for input fields
   final emailFocusNode = FocusNode();
   final passwordFocusNode = FocusNode();
   final confirmPasswordFocusNode = FocusNode();
@@ -28,11 +26,10 @@ class SignupController extends GetxController {
   final GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
   final auth = FirebaseAuth.instance;
 
-  var isLoading = false.obs; // Observable to track loading state
+  var isLoading = false.obs;
 
   @override
   void onClose() {
-    // Dispose controllers and focus nodes
     emailController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
@@ -54,7 +51,6 @@ class SignupController extends GetxController {
 
   Future<void> signup() async {
     if (!signupFormKey.currentState!.validate()) {
-      // Show a message if validation fails
       Fluttertoast.showToast(
         msg: "Please fill all fields correctly",
         textColor: Colors.white,
@@ -62,10 +58,9 @@ class SignupController extends GetxController {
       return;
     }
 
-    isLoading.value = true; // Start loading indicator
+    isLoading.value = true;
 
     try {
-      // Create user in Firebase Auth
       final UserCredential userCredential =
           await auth.createUserWithEmailAndPassword(
         email: emailController.text.trim(),
@@ -79,7 +74,6 @@ class SignupController extends GetxController {
 
       final String uid = user.uid;
 
-      // Save user data in Firestore
       await FirebaseFirestore.instance.collection("users").doc(uid).set({
         'userId': uid,
         'firstName': firstNameController.text.trim(),
@@ -97,8 +91,7 @@ class SignupController extends GetxController {
         textColor: Colors.white,
       );
 
-      // Navigate to another screen after successful signup
-      Get.offNamed('/homepage'); // Replace with your route name
+      Get.offNamed('/HomePage');
     } on FirebaseAuthException catch (error) {
       Fluttertoast.showToast(
         msg: error.message ?? "An error occurred",
@@ -110,7 +103,7 @@ class SignupController extends GetxController {
         textColor: Colors.red,
       );
     } finally {
-      isLoading.value = false; // Stop loading indicator
+      isLoading.value = false;
     }
   }
 }

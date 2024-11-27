@@ -17,8 +17,8 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
     Home(),
     MyOrdersPage(),
     CreateOrder(),
-    ProfilePage(),
     SupportPage(),
+    ProfilePage(),
   ];
 
   int _selectedIndex = 0;
