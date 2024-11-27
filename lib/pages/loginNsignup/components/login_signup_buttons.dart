@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:spare_ease/controllers/login.controller.dart';
+import 'package:spare_ease/controllers/signup.controller.dart';
 
 class LoginSignupButtons extends StatelessWidget {
   final VoidCallback onSignUp;
@@ -86,10 +89,12 @@ class LoginSignupButtons extends StatelessWidget {
 class LoginButton extends StatelessWidget {
   const LoginButton({super.key});
 
-  void _loginButtonFunctionality() {}
+  Future<void> _loginButtonFunctionality(BuildContext context) async {}
 
   @override
   Widget build(BuildContext context) {
+    final LoginController controller = Get.find<LoginController>();
+
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
@@ -111,7 +116,7 @@ class LoginButton extends StatelessWidget {
             color: Color(0xFFF7C910),
           ),
         ),
-        onPressed: _loginButtonFunctionality,
+        onPressed: () => controller.login(context),
         child: const Text(
           'Log In',
           style: TextStyle(
@@ -126,9 +131,8 @@ class LoginButton extends StatelessWidget {
 }
 
 class SignupButton extends StatelessWidget {
-  const SignupButton({super.key});
-
-  void _signupButtonFunctionality() {}
+  final SignupController controller = Get.find<SignupController>();
+  SignupButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -153,15 +157,17 @@ class SignupButton extends StatelessWidget {
             color: Color.fromARGB(255, 255, 255, 255),
           ),
         ),
-        onPressed: _signupButtonFunctionality,
-        child: const Text(
-          'Register',
-          style: TextStyle(
-            color: Color.fromARGB(255, 255, 255, 255),
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+        onPressed: () => controller.signup(context),
+        child: controller.isLoading.value
+            ? const CircularProgressIndicator(color: Colors.white)
+            : const Text(
+                'Register',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
       ),
     );
   }

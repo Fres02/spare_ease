@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:spare_ease/controllers/signup.controller.dart';
 import 'package:spare_ease/pages/loginNsignup/components/custom_text_field.dart';
 import 'package:spare_ease/pages/loginNsignup/components/login_signup_buttons.dart';
+import 'package:spare_ease/pages/loginNsignup/components/validator.dart';
 import 'package:spare_ease/pages/loginNsignup/login.dart';
+import 'package:get/get.dart';
 
 class SignupPage extends StatefulWidget {
+  static const routName = "/RegisterScreen";
+
   const SignupPage({super.key});
 
   @override
@@ -21,6 +26,10 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(
+      SignupController(),
+    );
+
     return Scaffold(
       backgroundColor: Color(0xFFF7C910),
       body: Container(
@@ -77,7 +86,7 @@ class _SignupPageState extends State<SignupPage> {
                     width: 120,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [Colors.orange, Colors.pink],
+                        colors: [Colors.orange, Color.fromRGBO(75, 62, 53, 1)],
                       ),
                       borderRadius: BorderRadius.circular(2),
                     ),
@@ -86,15 +95,26 @@ class _SignupPageState extends State<SignupPage> {
               ),
               const SizedBox(height: 24),
               Form(
+                key: controller.signupFormKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomTextField(
+                      controller: controller.emailController,
+                      focusnode: controller.emailFocusNode,
+                      validator: (value) {
+                        Validator.validateEmail(value);
+                      },
                       label: "Email Address",
                       keyboardType: TextInputType.emailAddress,
                     ),
                     SizedBox(height: 16),
                     CustomTextField(
+                      controller: controller.passwordController,
+                      focusnode: controller.passwordFocusNode,
+                      validator: (value) {
+                        Validator.validatePassword(value);
+                      },
                       label: "Password",
                       keyboardType: TextInputType.text,
                       obscureText: _obscureText,
@@ -110,6 +130,12 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                     SizedBox(height: 16),
                     CustomTextField(
+                      controller: controller.confirmPasswordController,
+                      focusnode: controller.confirmPasswordFocusNode,
+                      validator: (value) => Validator.validateConfirmPassword(
+                        controller.passwordController.text,
+                        value,
+                      ),
                       label: "Confirm Password",
                       keyboardType: TextInputType.text,
                       obscureText: _obscureText,
@@ -125,26 +151,42 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                     SizedBox(height: 16),
                     CustomTextField(
+                      controller: controller.firstNameController,
+                      focusnode: controller.firstNameFocusNode,
+                      validator: (value) =>
+                          Validator.validateEmptyText('First name', value),
                       label: "First Name",
                       keyboardType: TextInputType.text,
                     ),
                     SizedBox(height: 16),
                     CustomTextField(
+                      controller: controller.lastNameController,
+                      focusnode: controller.lastNameFocusNode,
+                      validator: (value) =>
+                          Validator.validateEmptyText('Last name', value),
                       label: "Last Name",
                       keyboardType: TextInputType.text,
                     ),
                     SizedBox(height: 16),
                     CustomTextField(
+                      controller: controller.contactNumberController,
+                      focusnode: controller.contactNumberFocusNode,
+                      validator: (value) =>
+                          Validator.validateEmptyText('Contact number', value),
                       label: "Contact Number",
                       keyboardType: TextInputType.phone,
                     ),
                     SizedBox(height: 16),
                     CustomTextField(
+                      controller: controller.addressController,
+                      focusnode: controller.addressFocusNode,
+                      validator: (value) =>
+                          Validator.validateEmptyText('Address', value),
                       label: "Address",
                       keyboardType: TextInputType.streetAddress,
                     ),
                     const SizedBox(height: 16),
-                    const SignupButton(),
+                    SignupButton(),
                     const SizedBox(height: 16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

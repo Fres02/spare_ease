@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:spare_ease/controllers/login.controller.dart';
 import 'package:spare_ease/pages/loginNsignup/components/login_signup_buttons.dart';
+import 'package:spare_ease/pages/loginNsignup/components/validator.dart';
 import 'package:spare_ease/pages/loginNsignup/signup.dart';
 import 'package:spare_ease/pages/loginNsignup/components/custom_text_field.dart';
+import 'package:get/get.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -18,6 +21,8 @@ class _LoginPageState extends State<LoginPage> {
       _obscureText = !_obscureText;
     });
   }
+
+  final LoginController controller = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -63,14 +68,25 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 50),
                   Form(
+                    key: controller.loginFormKey,
                     child: Column(
                       children: [
                         CustomTextField(
+                          controller: controller.emailController,
+                          focusnode: controller.emailFocusNode,
+                          validator: (value) {
+                            return Validator.validateEmail(value);
+                          },
                           label: "Email Address",
                           keyboardType: TextInputType.emailAddress,
                         ),
                         const SizedBox(height: 16),
                         CustomTextField(
+                          controller: controller.passwordController,
+                          focusnode: controller.passwordFocusNode,
+                          validator: (value) {
+                            return Validator.validatePassword(value);
+                          },
                           label: "Password",
                           keyboardType: TextInputType.text,
                           obscureText: _obscureText,
