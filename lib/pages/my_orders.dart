@@ -15,7 +15,7 @@ class _MyOrdersPageState extends State<MyOrdersPage> {
         backgroundColor: Colors.amber,
         centerTitle: true,
         title: const Text(
-          "My Orders",
+          "My Cart",
           textAlign: TextAlign.center,
         ),
       ),
