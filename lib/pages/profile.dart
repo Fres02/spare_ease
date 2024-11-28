@@ -1,6 +1,4 @@
-import 'dart:ui_web';
 import 'package:iconly/iconly.dart';
-
 import 'package:flutter/material.dart';
 import 'package:spare_ease/components/assets_manager.dart';
 import 'package:spare_ease/components/subtitle_text.dart';
@@ -18,15 +16,18 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        // evelation: 0,
+        backgroundColor: Colors.amberAccent,
         leading: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(10.0),
           child: Image.asset(
             AssetsManager.shoppingCart,
           ),
         ),
-        title: Text("Profile"),
+        title: Text(
+          "Profile",
+          style: TextStyle(fontWeight: FontWeight.w500),
+        ),
+        centerTitle: true,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,7 +37,7 @@ class _ProfilePageState extends State<ProfilePage> {
             child: Padding(
               padding: EdgeInsets.all(8.0),
               child: TitlesTextWidget(
-                label: "plese login",
+                label: "Please login",
               ),
             ),
           ),
