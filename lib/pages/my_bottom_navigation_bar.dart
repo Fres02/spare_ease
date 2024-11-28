@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:spare_ease/pages/create_orders.dart';
+import 'package:spare_ease/pages/search.dart';
 import 'package:spare_ease/pages/home.dart';
-import 'package:spare_ease/pages/my_orders.dart';
+import 'package:spare_ease/pages/my_cart.dart';
 import 'package:spare_ease/pages/profile.dart';
 import 'package:spare_ease/pages/support.dart';
 
@@ -15,8 +15,8 @@ class MyBottomNavigationBar extends StatefulWidget {
 class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   final List<Widget> _pages = [
     Home(),
-    MyOrdersPage(),
-    CreateOrder(),
+    MyCartPage(),
+    SearchPage(),
     SupportPage(),
     ProfilePage(),
   ];
@@ -90,12 +90,38 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Image.asset(
-                _selectedIndex == 1
-                    ? 'assets/selectedOrdersIcon.png'
-                    : 'assets/ordersIcon.png',
-                width: 30,
-                height: 30,
+              icon: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  // The main icon
+                  Image.asset(
+                    _selectedIndex == 1
+                        ? 'assets/selectedOrdersIcon.png'
+                        : 'assets/ordersIcon.png',
+                    width: 30,
+                    height: 30,
+                  ),
+                  // The badge
+                  Positioned(
+                    right: -4, // Adjust position as needed
+                    top: -4,
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: Colors.black, // Badge color
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Text(
+                        '5', // Badge count
+                        style: TextStyle(
+                          color: Colors.white, // Text color
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               label: 'My Orders',
             ),
