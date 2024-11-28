@@ -1,4 +1,3 @@
-import 'dart:ui_web';
 import 'package:iconly/iconly.dart';
 
 import 'package:flutter/material.dart';
