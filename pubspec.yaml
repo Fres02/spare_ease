@@ -44,6 +44,12 @@ dependencies:
   firebase_storage: ^12.3.6
   fluttertoast: ^8.2.8
   shimmer: ^3.0.0
+  fancy_shimmer_image: ^2.0.3
+  flutter_iconly: ^1.0.2
+  image_picker: ^0.8.7+5
+  dynamic_height_grid_view: ^0.0.3
+  card_swiper: ^2.0.4
+  ionicons: ^0.2.2
 
 dev_dependencies:
   flutter_test:

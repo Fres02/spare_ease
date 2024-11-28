@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spare_ease/components/assets_manager.dart';
 import 'subtitle_text.dart';
 import 'title_text.dart';
 
