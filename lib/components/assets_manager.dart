@@ -4,6 +4,7 @@ class AssetsManager {
   static String bagImagesPath = "assets/images/bag";
   static String bannersImagesPath = "assets/images/banners";
   static String categoriesImagesPath = "assets/images/categories";
+  static String brandsImagesPath = "assets/images/brands";
 
 // general images
   static String forgotPassword = "$imagesPath/forgot_password.jpg";
@@ -33,12 +34,15 @@ class AssetsManager {
   static String banner1 = "$bannersImagesPath/banner1.png";
   static String banner2 = "$bannersImagesPath/banner2.png";
   // Categories path
-  static String mobiles = "$categoriesImagesPath/mobiles.png";
-  static String fashion = "$categoriesImagesPath/fashion.png";
-  static String watch = "$categoriesImagesPath/watch.png";
-  static String book = "$categoriesImagesPath/book_img.png";
-  static String electronics = "$categoriesImagesPath/electronics.png";
-  static String cosmetics = "$categoriesImagesPath/cosmetics.png";
-  static String shoes = "$categoriesImagesPath/shoes.png";
-  static String pc = "$categoriesImagesPath/pc.png";
+  static String batteries = "$categoriesImagesPath/batteries.png";
+  static String helmet = "$categoriesImagesPath/helmet.jpg";
+  static String lights = "$categoriesImagesPath/lights.png";
+  static String pumps = "$categoriesImagesPath/smokepumps.png";
+  static String tyres = "$categoriesImagesPath/tyers.png";
+
+  //brands
+  static String honda = "$brandsImagesPath/bajaj.png";
+  static String bajaj = "$brandsImagesPath/honda.png";
+  static String yamaha = "$brandsImagesPath/yamaha.png";
+  static String tvs = "$brandsImagesPath/privacy.png";
 }

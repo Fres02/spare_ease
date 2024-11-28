@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:spare_ease/components/app_constants.dart';
 import 'package:spare_ease/components/subtitle_text.dart';
+import 'package:spare_ease/pages/product_details.dart';
 
 import '../../models/product_model.dart';
 import '../../providers/cart_provider.dart';
@@ -18,7 +19,9 @@ class LatestArrivalProductsWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
-        onTap: () {},
+        onTap: () async {
+          await Navigator.pushNamed(context, ProductDetailsScreen.routeName);
+        },
         child: SizedBox(
           width: size.width * 0.45,
           child: Row(
@@ -66,11 +69,33 @@ class LatestArrivalProductsWidget extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const FittedBox(
-                      child: SubtitleTextWidget(
-                        label: "1550.00\$",
-                        fontWeight: FontWeight.w600,
-                        color: Colors.blue,
+                    FittedBox(
+                      child: RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: "LKR",
+                              style: TextStyle(
+                                fontSize: 10, // Smaller font size
+                                fontWeight: FontWeight.w600,
+                                color: Colors.blue,
+                              ),
+                            ),
+                            WidgetSpan(
+                              child: SizedBox(
+                                  width:
+                                      2), // Space between "LKR" and the value
+                            ),
+                            TextSpan(
+                              text: "1500.00",
+                              style: TextStyle(
+                                fontSize: 16, // Regular font size
+                                fontWeight: FontWeight.w600,
+                                color: Colors.blue,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],

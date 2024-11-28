@@ -1,17 +1,12 @@
-import 'package:iconly/iconly.dart';
 import 'package:flutter/material.dart';
 import 'package:spare_ease/components/assets_manager.dart';
 import 'package:spare_ease/components/subtitle_text.dart';
 import 'package:spare_ease/components/title_text.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
 
-class ProfilePage extends StatefulWidget {
+class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
-  @override
-  State<ProfilePage> createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,46 +30,30 @@ class _ProfilePageState extends State<ProfilePage> {
           const Visibility(
             visible: false,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(18.0),
               child: TitlesTextWidget(
-                label: "Please login",
+                label: "Please login to have unlimited access",
               ),
             ),
           ),
           Visibility(
-            visible: true, // Corrected syntax
+            visible: true,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               child: Row(
                 children: [
-                  Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Theme.of(context).cardColor,
-                      border: Border.all(
-                          color: Theme.of(context).colorScheme.background,
-                          width: 3),
-                      image: DecorationImage(
-                        image: NetworkImage(
-                          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
-                        ),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
                   const SizedBox(
                     width: 10,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
-                      TitlesTextWidget(label: "Hadi Kachar"),
+                      SizedBox(height: 10),
+                      TitlesTextWidget(label: "Hadi Kachmar"),
                       SizedBox(
                         height: 6,
                       ),
-                      SubtitleTextWidget(label: "Coding.with.@gmail")
+                      SubtitleTextWidget(label: "Coding.with.hadi@gmail.com")
                     ],
                   )
                 ],
@@ -89,6 +68,12 @@ class _ProfilePageState extends State<ProfilePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const Divider(
+                  thickness: 1,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
                 const TitlesTextWidget(
                   label: "General",
                 ),
@@ -96,34 +81,33 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: 10,
                 ),
                 CustomListTile(
-                    text: "All Orders",
-                    imagePath: AssetsManager.orderSvg,
-                    function: () {}),
-                CustomListTile(
-                    text: "Wishlist",
-                    imagePath: AssetsManager.orderSvg,
-                    function: () {}),
-                CustomListTile(
-                    text: "Recent",
-                    imagePath: AssetsManager.orderSvg,
-                    function: () {}),
-                CustomListTile(
-                    text: "Address",
-                    imagePath: AssetsManager.orderSvg,
-                    function: () {}),
-                const SizedBox(
-                  height: 6,
+                  text: "All Order",
+                  imagePath: AssetsManager.orderSvg,
+                  function: () {},
                 ),
-                const Divider(thickness: 5),
-                const SizedBox(
-                  height: 6,
+                CustomListTile(
+                  text: "Wishlist",
+                  imagePath: AssetsManager.wishlistSvg,
+                  function: () {},
                 ),
+                CustomListTile(
+                  text: "Viewed recently",
+                  imagePath: AssetsManager.recent,
+                  function: () {},
+                ),
+                CustomListTile(
+                  text: "Address",
+                  imagePath: AssetsManager.address,
+                  function: () {},
+                ),
+                const SizedBox(height: 6),
+                const Divider(
+                  thickness: 1,
+                ),
+                const SizedBox(height: 6),
                 const TitlesTextWidget(
                   label: "Settings",
                 ),
-                const SizedBox(
-                  height: 10,
-                )
               ],
             ),
           ),
@@ -155,7 +139,6 @@ class CustomListTile extends StatelessWidget {
     required this.text,
     required this.function,
   });
-
   final String imagePath, text;
   final Function function;
   @override
@@ -169,7 +152,7 @@ class CustomListTile extends StatelessWidget {
         imagePath,
         height: 34,
       ),
-      trailing: const Icon(IconlyLight.arrow_right_2),
+      trailing: const Icon(IconlyLight.arrowRight2),
     );
   }
 }

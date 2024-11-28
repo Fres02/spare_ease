@@ -2,6 +2,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:spare_ease/components/app_name_text.dart';
 import 'package:spare_ease/components/assets_manager.dart';
+import 'package:spare_ease/components/category_rounded_widget.dart';
 import 'package:spare_ease/components/latest_arrival.dart';
 import 'package:spare_ease/components/title_text.dart';
 import 'package:spare_ease/components/app_constants.dart';
@@ -30,49 +31,82 @@ class Home extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 15,
-            ),
-            SizedBox(
-              height: size.height * 0.25,
-              child: ClipRRect(
-                // borderRadius: BorderRadius.circular(50),
-                child: Swiper(
-                  itemBuilder: (BuildContext context, int index) {
-                    return Image.asset(
-                      AppConstants.bannersImages[index],
-                      fit: BoxFit.fill,
-                    );
-                  },
-                  itemCount: AppConstants.bannersImages.length,
-                  pagination: const SwiperPagination(
-                    // alignment: Alignment.center,
-                    builder: DotSwiperPaginationBuilder(
-                        activeColor: Colors.red, color: Colors.white),
+        child: SingleChildScrollView(
+          // Ensures the whole page is scrollable
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 15),
+              SizedBox(
+                height: size.height * 0.25,
+                child: ClipRRect(
+                  child: Swiper(
+                    itemBuilder: (BuildContext context, int index) {
+                      return Image.asset(
+                        AppConstants.bannersImages[index],
+                        fit: BoxFit.fill,
+                      );
+                    },
+                    itemCount: AppConstants.bannersImages.length,
+                    pagination: const SwiperPagination(
+                      builder: DotSwiperPaginationBuilder(
+                          activeColor: Colors.red, color: Colors.white),
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 15.0,
-            ),
-            const TitlesTextWidget(label: "Latest arrival"),
-            const SizedBox(
-              height: 15.0,
-            ),
-            SizedBox(
-              height: size.height * 0.2,
-              child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return LatestArrivalProductsWidget();
-                  }),
-            )
-          ],
+              const SizedBox(height: 15.0),
+              const TitlesTextWidget(label: "Latest Arrival"),
+              const SizedBox(height: 15.0),
+              SizedBox(
+                height: size.height * 0.2,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      return LatestArrivalProductsWidget();
+                    }),
+              ),
+              const TitlesTextWidget(label: "Categories"),
+              const SizedBox(height: 15.0),
+              SizedBox(
+                height: size.height * 0.1,
+                child: GridView.count(
+                  crossAxisCount: 4,
+                  physics: NeverScrollableScrollPhysics(),
+                  children: [
+                    CategoryRoundedWidget(
+                        image: AssetsManager.batteries, name: "Batteries"),
+                    CategoryRoundedWidget(
+                        image: AssetsManager.helmet, name: "Accessories"),
+                    CategoryRoundedWidget(
+                        image: AssetsManager.lights, name: "Lights"),
+                    CategoryRoundedWidget(
+                        image: AssetsManager.tyres, name: "Tyres"),
+                  ],
+                ),
+              ),
+              const TitlesTextWidget(label: "Brands"),
+              const SizedBox(height: 15.0),
+              SizedBox(
+                height: size.height * 0.1,
+                child: GridView.count(
+                  crossAxisCount: 4,
+                  physics: NeverScrollableScrollPhysics(),
+                  children: [
+                    CategoryRoundedWidget(
+                        image: AssetsManager.bajaj, name: "Bajaj"),
+                    CategoryRoundedWidget(
+                        image: AssetsManager.yamaha, name: "Yamaha"),
+                    CategoryRoundedWidget(
+                        image: AssetsManager.honda, name: "Honda"),
+                    CategoryRoundedWidget(
+                        image: AssetsManager.tyres, name: "TVS"),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
