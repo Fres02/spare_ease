@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:spare_ease/components/assets_manager.dart';
+import 'package:spare_ease/components/empty_cart.dart';
+import 'package:spare_ease/components/subtitle_text.dart';
+import 'package:spare_ease/components/title_text.dart';
 
 class MyOrdersPage extends StatefulWidget {
   const MyOrdersPage({super.key});
@@ -11,14 +15,10 @@ class _MyOrdersPageState extends State<MyOrdersPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.amber,
-        centerTitle: true,
-        title: const Text(
-          "My Cart",
-          textAlign: TextAlign.center,
-        ),
-      ),
-    );
+        body: EmptyCartWidget(
+            imagePath: AssetsManager.shoppingBasket,
+            title: "Whoops",
+            subtitle: "Looks like your cart is empty.",
+            buttonText: "Shop Now"));
   }
 }

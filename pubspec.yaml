@@ -81,6 +81,11 @@ flutter:
     - assets/selectedOrdersIcon.png
     - assets/addIcon.png
     - assets/intro.jpg
+    - assets/images/
+    - assets/images/profile/
+    - assets/images/bag/
+    - assets/images/banners/
+    - assets/images/categories/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
