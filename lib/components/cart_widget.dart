@@ -16,11 +16,108 @@ class CartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    final cartModel = Provider.of<CartModel>(context);
-    final productsProvider = Provider.of<ProductsProvider>(context);
-    final getCurrProduct = productsProvider.findByProdId(cartModel.productId);
-    final cartProvider = Provider.of<CartProvider>(context);
-    return getCurrProduct == null
+
+    return FittedBox(
+      child: IntrinsicWidth(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12.0),
+                child: FancyShimmerImage(
+                  imageUrl:
+                      'https://images.unsplash.com/photo-1465572089651-8fde36c892dd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+                  height: size.height * 0.2,
+                  width: size.height * 0.2,
+                ),
+              ),
+              SizedBox(width: 20),
+              IntrinsicWidth(
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: size.width * 0.6,
+                          child: TitlesTextWidget(
+                            label: 'Title' * 10,
+                            maxLines: 2,
+                          ),
+                        ),
+                        Column(
+                          children: [
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.clear_rounded,
+                                color: Colors.red,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                IconlyLight.heart,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SubtitleTextWidget(
+                          label: "16.00\LKR",
+                          color: Colors.lightBlue,
+                        ),
+                        OutlinedButton.icon(
+                          onPressed: () async {
+                            await showModalBottomSheet(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(30),
+                                  topRight: Radius.circular(30),
+                                ),
+                              ),
+                              context: context,
+                              builder: (context) {
+                                return QuantityBottomSheetWidget();
+                              },
+                            );
+                          },
+                          icon: Icon(IconlyLight.arrowDown2),
+                          label: Text("Qty: 6"),
+                          style: OutlinedButton.styleFrom(
+                            side: BorderSide(
+                              width: 1,
+                              color: const Color.fromARGB(255, 198, 198, 198),
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+    //final cartModel = Provider.of<CartModel>(context);
+    //final productsProvider = Provider.of<ProductsProvider>(context);
+    //final getCurrProduct = productsProvider.findByProdId(cartModel.productId);
+    //final cartProvider = Provider.of<CartProvider>(context);
+ 
+ 
+ /*   return getCurrProduct == null
         ? const SizedBox.shrink()
         : FittedBox(
             child: IntrinsicWidth(
@@ -124,4 +221,4 @@ class CartWidget extends StatelessWidget {
             ),
           );
   }
-}
+} */

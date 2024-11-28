@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spare_ease/components/assets_manager.dart';
+import 'package:spare_ease/components/bottom_checkout.dart';
 import 'package:spare_ease/components/cart_widget.dart';
 import 'package:spare_ease/components/empty_cart.dart';
 
@@ -23,6 +24,7 @@ class _MyOrdersPageState extends State<MyOrdersPage> {
                 buttonText: "Shop Now"),
           )
         : Scaffold(
+            bottomSheet: CartBottomSheetWidget(),
             appBar: AppBar(
               backgroundColor: Colors.amberAccent,
               leading: Padding(
@@ -35,7 +37,10 @@ class _MyOrdersPageState extends State<MyOrdersPage> {
               actions: [
                 IconButton(
                   onPressed: () {},
-                  icon: Icon(Icons.delete_forever_rounded),
+                  icon: Icon(
+                    Icons.delete_forever_rounded,
+                    color: Colors.red,
+                  ),
                 )
               ],
               centerTitle: true,
@@ -43,7 +48,7 @@ class _MyOrdersPageState extends State<MyOrdersPage> {
             body: ListView.builder(
               itemCount: 10,
               itemBuilder: (context, index) {
-                CartWidget();
+                return CartWidget();
               },
             ),
           );

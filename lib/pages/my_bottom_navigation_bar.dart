@@ -90,12 +90,38 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Image.asset(
-                _selectedIndex == 1
-                    ? 'assets/selectedOrdersIcon.png'
-                    : 'assets/ordersIcon.png',
-                width: 30,
-                height: 30,
+              icon: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  // The main icon
+                  Image.asset(
+                    _selectedIndex == 1
+                        ? 'assets/selectedOrdersIcon.png'
+                        : 'assets/ordersIcon.png',
+                    width: 30,
+                    height: 30,
+                  ),
+                  // The badge
+                  Positioned(
+                    right: -4, // Adjust position as needed
+                    top: -4,
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: Colors.black, // Badge color
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Text(
+                        '5', // Badge count
+                        style: TextStyle(
+                          color: Colors.white, // Text color
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               label: 'My Orders',
             ),
