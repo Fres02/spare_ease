@@ -44,6 +44,7 @@ dependencies:
   firebase_storage: ^12.3.6
   fluttertoast: ^8.2.8
   shimmer: ^3.0.0
+  iconly: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -81,6 +82,11 @@ flutter:
     - assets/selectedOrdersIcon.png
     - assets/addIcon.png
     - assets/intro.jpg
+    - assets/images/
+    - assets/images/profile/
+    - assets/images/bag/
+    - assets/images/banners/
+    - assets/images/categories/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
