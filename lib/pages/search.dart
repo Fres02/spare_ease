@@ -4,14 +4,14 @@ import 'package:spare_ease/components/assets_manager.dart';
 import 'package:spare_ease/components/product_widget.dart';
 import 'package:spare_ease/components/title_text.dart';
 
-class CreateOrder extends StatefulWidget {
-  const CreateOrder({super.key});
+class SearchPage extends StatefulWidget {
+  const SearchPage({super.key});
 
   @override
-  State<CreateOrder> createState() => _CreateOrderState();
+  State<SearchPage> createState() => _SearchPageState();
 }
 
-class _CreateOrderState extends State<CreateOrder> {
+class _SearchPageState extends State<SearchPage> {
   late TextEditingController searchTextController;
 
   @override
@@ -34,13 +34,18 @@ class _CreateOrderState extends State<CreateOrder> {
       },
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.amberAccent,
           leading: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(10.0),
             child: Image.asset(
               AssetsManager.shoppingCart,
             ),
           ),
-          title: const TitlesTextWidget(label: "Search products"),
+          title: Text(
+            "Search",
+            style: TextStyle(fontWeight: FontWeight.w500),
+          ),
+          centerTitle: true,
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -55,10 +60,8 @@ class _CreateOrderState extends State<CreateOrder> {
                   prefixIcon: const Icon(Icons.search),
                   suffixIcon: GestureDetector(
                     onTap: () {
-                      setState(() {
-                        FocusScope.of(context).unfocus();
-                        searchTextController.clear();
-                      });
+                      FocusScope.of(context).unfocus();
+                      searchTextController.clear();
                     },
                     child: const Icon(
                       Icons.clear,

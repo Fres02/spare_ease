@@ -69,25 +69,47 @@ class _ProductWidgetState extends State<ProductWidget> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(
+                  Flexible(
                     flex: 1,
-                    child: SubtitleTextWidget(
-                      label: "1550.00\$",
-                      fontWeight: FontWeight.w600,
-                      color: Colors.blue,
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "LKR",
+                            style: TextStyle(
+                              fontSize: 10, // Smaller font size
+                              fontWeight: FontWeight.w600,
+                              color: Colors.blue,
+                            ),
+                          ),
+                          WidgetSpan(
+                            child: SizedBox(
+                                width: 2), // Space between "LKR" and the value
+                          ),
+                          TextSpan(
+                            text: "1550.00",
+                            style: TextStyle(
+                              fontSize: 16, // Regular font size
+                              fontWeight: FontWeight.w600,
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   Flexible(
                     child: Material(
                       borderRadius: BorderRadius.circular(12.0),
-                      color: Colors.lightBlue,
+                      color: Colors.amber,
                       child: InkWell(
                         borderRadius: BorderRadius.circular(12.0),
                         onTap: () {},
-                        splashColor: Colors.red,
+                        splashColor: Color.fromRGBO(75, 62, 53, 1),
                         child: const Padding(
                           padding: EdgeInsets.all(6.0),
-                          child: Icon(Icons.add_shopping_cart_outlined),
+                          child:
+                              Icon(Icons.add_shopping_cart_outlined, size: 20),
                         ),
                       ),
                     ),

@@ -68,9 +68,33 @@ class CartWidget extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SubtitleTextWidget(
-                          label: "16.00\LKR",
-                          color: Colors.lightBlue,
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: "LKR",
+                                style: TextStyle(
+                                  fontSize: 10, // Smaller font size for "LKR"
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.lightBlue,
+                                ),
+                              ),
+                              WidgetSpan(
+                                child: SizedBox(
+                                    width:
+                                        2), // Space between "LKR" and the value
+                              ),
+                              TextSpan(
+                                text: "16.00",
+                                style: TextStyle(
+                                  fontSize:
+                                      20, // Regular font size for the value
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.lightBlue,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         OutlinedButton.icon(
                           onPressed: () async {

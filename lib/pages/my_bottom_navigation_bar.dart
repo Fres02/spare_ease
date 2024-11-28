@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:spare_ease/pages/create_orders.dart';
+import 'package:spare_ease/pages/search.dart';
 import 'package:spare_ease/pages/home.dart';
-import 'package:spare_ease/pages/my_orders.dart';
+import 'package:spare_ease/pages/my_cart.dart';
 import 'package:spare_ease/pages/profile.dart';
 import 'package:spare_ease/pages/support.dart';
 
@@ -15,8 +15,8 @@ class MyBottomNavigationBar extends StatefulWidget {
 class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   final List<Widget> _pages = [
     Home(),
-    MyOrdersPage(),
-    CreateOrder(),
+    MyCartPage(),
+    SearchPage(),
     SupportPage(),
     ProfilePage(),
   ];

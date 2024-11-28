@@ -4,15 +4,15 @@ import 'package:spare_ease/components/bottom_checkout.dart';
 import 'package:spare_ease/components/cart_widget.dart';
 import 'package:spare_ease/components/empty_cart.dart';
 
-class MyOrdersPage extends StatefulWidget {
-  const MyOrdersPage({super.key});
+class MyCartPage extends StatefulWidget {
+  const MyCartPage({super.key});
   final bool isEmpty = false;
 
   @override
-  State<MyOrdersPage> createState() => _MyOrdersPageState();
+  State<MyCartPage> createState() => _MyCartPageState();
 }
 
-class _MyOrdersPageState extends State<MyOrdersPage> {
+class _MyCartPageState extends State<MyCartPage> {
   @override
   Widget build(BuildContext context) {
     return widget.isEmpty
@@ -33,7 +33,10 @@ class _MyOrdersPageState extends State<MyOrdersPage> {
                   AssetsManager.shoppingCart,
                 ),
               ),
-              title: Text("Cart"),
+              title: Text(
+                "Cart",
+                style: TextStyle(fontWeight: FontWeight.w500),
+              ),
               actions: [
                 IconButton(
                   onPressed: () {},
