@@ -57,9 +57,9 @@ class _ProfilePageState extends State<ProfilePage> {
                           color: Theme.of(context).colorScheme.background,
                           width: 3),
                       image: DecorationImage(
-                        image: NetworkImage("link"
-                            // userModel!.userImage,
-                            ),
+                        image: NetworkImage(
+                          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
+                        ),
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -70,10 +70,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
-                      // TitlesTextWidget(label: userModel!.userName),
-
                       TitlesTextWidget(label: "Hadi Kachar"),
-
                       SizedBox(
                         height: 6,
                       ),
