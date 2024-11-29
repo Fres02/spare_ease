@@ -5,19 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
 import 'package:spare_ease/components/app_constants.dart';
 import 'package:spare_ease/components/subtitle_text.dart';
 import 'package:spare_ease/components/title_text.dart';
+import 'package:spare_ease/models/product_model.dart';
 import 'package:spare_ease/pages/product_details.dart';
 
 class ProductWidget extends StatefulWidget {
   const ProductWidget({
     super.key,
-    this.image,
-    this.title,
-    this.price,
   });
-  final String? image, title, price;
+
   @override
   State<ProductWidget> createState() => _ProductWidgetState();
 }
@@ -25,6 +24,7 @@ class ProductWidget extends StatefulWidget {
 class _ProductWidgetState extends State<ProductWidget> {
   @override
   Widget build(BuildContext context) {
+    final productsModelProvider = Provider.of<ProductModel>(context);
     Size size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.all(0.0),
@@ -37,7 +37,7 @@ class _ProductWidgetState extends State<ProductWidget> {
             ClipRRect(
               borderRadius: BorderRadius.circular(12.0),
               child: FancyShimmerImage(
-                imageUrl: widget.image ?? AppConstants.imageUrl,
+                imageUrl: productsModelProvider.productImage,
                 height: size.height * 0.22,
                 width: double.infinity,
               ),
@@ -52,7 +52,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                   Flexible(
                     flex: 5,
                     child: TitlesTextWidget(
-                      label: widget.title ?? "Title " * 10,
+                      label: productsModelProvider.productTitle,
                       fontSize: 18,
                       maxLines: 2,
                     ),
@@ -62,6 +62,23 @@ class _ProductWidgetState extends State<ProductWidget> {
                     child: IconButton(
                       onPressed: () {},
                       icon: const Icon(IconlyLight.heart),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 6.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Row(
+                children: [
+                  Flexible(
+                    flex: 5,
+                    child: TitlesTextWidget(
+                      label: productsModelProvider.productBrand,
+                      fontSize: 15,
                     ),
                   ),
                 ],
@@ -93,7 +110,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                                 width: 2), // Space between "LKR" and the value
                           ),
                           TextSpan(
-                            text: widget.price ?? "1550.00",
+                            text: productsModelProvider.productPrice,
                             style: TextStyle(
                               fontSize: 16, // Regular font size
                               fontWeight: FontWeight.w600,

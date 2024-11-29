@@ -4,6 +4,8 @@ import 'package:spare_ease/components/assets_manager.dart';
 import 'package:spare_ease/components/product_widget.dart';
 import 'package:spare_ease/components/title_text.dart';
 import 'package:spare_ease/models/product_model.dart';
+import 'package:spare_ease/providers/products_provider.dart';
+import 'package:provider/provider.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -29,6 +31,7 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    final productsProvider = Provider.of<ProductsProvider>(context);
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -83,15 +86,14 @@ class _SearchPageState extends State<SearchPage> {
               ),
               Expanded(
                 child: DynamicHeightGridView(
-                  itemCount: ProductModel.products.length,
+                  itemCount: productsProvider.getProducts.length,
                   crossAxisCount: 2,
                   mainAxisSpacing: 12,
                   crossAxisSpacing: 12,
                   builder: (context, index) {
-                    return ProductWidget(
-                      image: ProductModel.products[index].productImage,
-                      title: ProductModel.products[index].productTitle,
-                      price: ProductModel.products[index].productPrice,
+                    return ChangeNotifierProvider.value(
+                      value: productsProvider.getProducts[index],
+                      child: ProductWidget(),
                     );
                   },
                 ),
