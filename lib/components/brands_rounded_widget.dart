@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:spare_ease/components/subtitle_text.dart';
 import 'package:spare_ease/pages/search.dart';
 
-class CategoryRoundedWidget extends StatelessWidget {
-  const CategoryRoundedWidget({
+class BrandRoundedWidget extends StatelessWidget {
+  const BrandRoundedWidget({
     super.key,
     required this.image,
     required this.name,

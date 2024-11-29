@@ -4,10 +4,12 @@ import 'package:spare_ease/components/my_app_functions.dart';
 import 'package:spare_ease/components/subtitle_text.dart';
 import 'package:spare_ease/components/title_text.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:spare_ease/pages/onboarding_screen/onboarding_screen.dart';
 import 'package:spare_ease/pages/placed_orders.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
+  static const routeName = '/ProfilePage';
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -79,8 +81,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   imagePath: AssetsManager.orderSvg,
                   function: () => Navigator.pushNamed(
                     context,
-                    PlacedOrdersScreen
-                        .routeName, // Replace with actual route name
+                    PlacedOrdersScreen.routeName,
                   ),
                 ),
                 CustomListTile(
@@ -126,17 +127,28 @@ class _ProfilePageState extends State<ProfilePage> {
                   await MyAppFunctions.showErrorOrWarningDialog(
                     context: context,
                     subtitle: "Are you sure you want to logout?",
-                    fct: () {
+                    fct: () async {
                       setState(() {
-                        isLoggedIn = false; // Simulating logout
+                        isLoggedIn = false; // Simulate logout
                       });
+
+                      // Wait for a brief moment to allow state update before navigating
+                      await Future.delayed(const Duration(milliseconds: 300));
+
+                      // Push to the OnBoardingScreen and replace the current screen
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => OnBoardingScreen(),
+                        ),
+                      );
                     },
                     isError: false,
                   );
                 },
               ),
             ),
-          ),
+          )
         ],
       ),
     );

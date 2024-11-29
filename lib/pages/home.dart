@@ -32,7 +32,6 @@ class Home extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
-          // Ensures the whole page is scrollable
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -50,7 +49,8 @@ class Home extends StatelessWidget {
                     itemCount: AppConstants.bannersImages.length,
                     pagination: const SwiperPagination(
                       builder: DotSwiperPaginationBuilder(
-                          activeColor: Colors.red, color: Colors.white),
+                          activeColor: Color.fromRGBO(75, 62, 53, 1),
+                          color: Colors.white),
                     ),
                   ),
                 ),
@@ -86,6 +86,7 @@ class Home extends StatelessWidget {
                   ],
                 ),
               ),
+              const SizedBox(height: 15),
               const TitlesTextWidget(label: "Brands"),
               const SizedBox(height: 15.0),
               SizedBox(

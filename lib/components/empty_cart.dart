@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:spare_ease/pages/my_bottom_navigation_bar.dart';
+import 'package:spare_ease/pages/search.dart';
 import 'subtitle_text.dart';
 import 'title_text.dart';
 
@@ -56,7 +58,15 @@ class EmptyCartWidget extends StatelessWidget {
                       color: Color.fromARGB(255, 255, 255, 255),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () async {
+                    await Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            MyBottomNavigationBar(initialIndex: 2),
+                      ),
+                    );
+                  },
                   child: Text(
                     buttonText,
                     style: TextStyle(

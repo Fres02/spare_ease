@@ -9,6 +9,8 @@ import 'package:spare_ease/pages/product_details.dart';
 import 'package:spare_ease/providers/products_provider.dart';
 import 'package:spare_ease/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:spare_ease/pages/profile.dart';
+import 'package:spare_ease/pages/search.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,6 +37,9 @@ class MyApp extends StatelessWidget {
           ProductDetailsScreen.routeName: (context) =>
               const ProductDetailsScreen(),
           PlacedOrdersScreen.routeName: (context) => const PlacedOrdersScreen(),
+          ProfilePage.routeName: (context) => const ProfilePage(),
+          SearchPage.routeName: (context) => const SearchPage(),
+          '/bottomNav': (context) => MyBottomNavigationBar(),
         },
       ),
     );

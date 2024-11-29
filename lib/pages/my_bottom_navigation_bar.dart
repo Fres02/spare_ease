@@ -6,7 +6,9 @@ import 'package:spare_ease/pages/profile.dart';
 import 'package:spare_ease/pages/support.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
-  const MyBottomNavigationBar({super.key});
+  final int initialIndex; // Add this to receive the initial index
+
+  const MyBottomNavigationBar({super.key, this.initialIndex = 0});
 
   @override
   State<MyBottomNavigationBar> createState() => _MyBottomNavigationBarState();
@@ -29,10 +31,11 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
     });
   }
 
-  void _onFabPressed() {
-    setState(() {
-      _selectedIndex = 2;
-    });
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex =
+        widget.initialIndex; // Set the initial index from the parameter
   }
 
   @override
@@ -46,7 +49,11 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
           highlightColor: Colors.transparent,
         ),
         child: FloatingActionButton(
-          onPressed: _onFabPressed,
+          onPressed: () {
+            setState(() {
+              _selectedIndex = 2; // Set to the Search page (index 2)
+            });
+          },
           backgroundColor: Color(0xFFF7C910),
           shape: CircleBorder(),
           elevation: 0,
@@ -93,7 +100,6 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
               icon: Stack(
                 clipBehavior: Clip.none,
                 children: [
-                  // The main icon
                   Image.asset(
                     _selectedIndex == 1
                         ? 'assets/selectedOrdersIcon.png'
@@ -101,20 +107,19 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
                     width: 30,
                     height: 30,
                   ),
-                  // The badge
                   Positioned(
-                    right: -4, // Adjust position as needed
+                    right: -4,
                     top: -4,
                     child: Container(
                       padding: const EdgeInsets.all(4),
                       decoration: BoxDecoration(
-                        color: Colors.black, // Badge color
+                        color: Colors.black,
                         shape: BoxShape.circle,
                       ),
                       child: const Text(
-                        '5', // Badge count
+                        '5',
                         style: TextStyle(
-                          color: Colors.white, // Text color
+                          color: Colors.white,
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),

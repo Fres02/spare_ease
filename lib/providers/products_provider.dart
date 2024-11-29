@@ -8,6 +8,38 @@ class ProductsProvider with ChangeNotifier {
     return products;
   }
 
+  ProductModel? findById(String productId) {
+    if (products.where((element) => element.productId == productId).isEmpty) {
+      return null;
+    }
+    return products.firstWhere((element) => element.productId == productId);
+  }
+
+  List<ProductModel> findByCategory({required String categoryName}) {
+    List<ProductModel> categoryList = products
+        .where((element) =>
+            element.productCategory
+                .toLowerCase()
+                .contains(categoryName.toLowerCase()) ||
+            element.productBrand
+                .toLowerCase()
+                .contains(categoryName.toLowerCase()))
+        .toList();
+    return categoryList;
+  }
+
+  List<ProductModel> searchQuery(
+      {required String searchText, required List<ProductModel> passedList}) {
+    List<ProductModel> searchList = passedList
+        .where(
+          (element) => element.productTitle.toLowerCase().contains(
+                searchText.toLowerCase(),
+              ),
+        )
+        .toList();
+    return searchList;
+  }
+
   List<ProductModel> products = [
     // Phones
     ProductModel(
@@ -20,7 +52,7 @@ class ProductsProvider with ChangeNotifier {
           "6.1-inch Super Retina XDR display with ProMotion and always-on display. Dynamic Island, a new and magical way to interact with your iPhone. 48MP main camera for up to 4x higher resolution. Cinematic mode, now in 4K Dolby Vision up to 30 fps. Action mode, for stable and smooth videos when you're on the move. Accident detection, vital safety technology that calls for help for you. All-day battery life and up to 23 hours of video playback.",
       productImage: "https://i.ibb.co/BtMBSgK/1-iphone14-128gb-black.webp",
       productQuantity: "10",
-      productBrand: "Dhara",
+      productBrand: "Bajaj",
     ),
     ProductModel(
       //2
