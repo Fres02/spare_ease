@@ -7,7 +7,7 @@ import 'package:spare_ease/pages/loginNsignup/login.dart';
 import 'package:get/get.dart';
 
 class SignupPage extends StatefulWidget {
-  static const routName = "/SignupPage";
+  static const routName = "/Signup";
 
   const SignupPage({super.key});
 
@@ -23,6 +23,9 @@ class _SignupPageState extends State<SignupPage> {
       _obscureText = !_obscureText;
     });
   }
+
+  final SignupController controller = Get.put(SignupController());
+  final GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +98,7 @@ class _SignupPageState extends State<SignupPage> {
               ),
               const SizedBox(height: 24),
               Form(
-                key: controller.signupFormKey,
+                key: signupFormKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -186,7 +189,7 @@ class _SignupPageState extends State<SignupPage> {
                       keyboardType: TextInputType.streetAddress,
                     ),
                     const SizedBox(height: 16),
-                    SignupButton(),
+                    SignupButton(formKey: signupFormKey),
                     const SizedBox(height: 16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

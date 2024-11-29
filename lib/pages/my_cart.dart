@@ -6,7 +6,7 @@ import 'package:spare_ease/components/empty_cart.dart';
 
 class MyCartPage extends StatefulWidget {
   const MyCartPage({super.key});
-  final bool isEmpty = false;
+  final bool isEmpty = true;
 
   @override
   State<MyCartPage> createState() => _MyCartPageState();
@@ -17,6 +17,20 @@ class _MyCartPageState extends State<MyCartPage> {
   Widget build(BuildContext context) {
     return widget.isEmpty
         ? Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.amberAccent,
+              leading: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Image.asset(
+                  AssetsManager.shoppingCart,
+                ),
+              ),
+              title: Text(
+                "Cart",
+                style: TextStyle(fontWeight: FontWeight.w500),
+              ),
+              centerTitle: true,
+            ),
             body: EmptyCartWidget(
                 imagePath: AssetsManager.shoppingBasket,
                 title: "Whoops",

@@ -8,6 +8,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:spare_ease/components/app_constants.dart';
 import 'package:spare_ease/components/subtitle_text.dart';
 import 'package:spare_ease/components/title_text.dart';
+import 'package:spare_ease/pages/product_details.dart';
 
 class ProductWidget extends StatefulWidget {
   const ProductWidget({
@@ -28,8 +29,8 @@ class _ProductWidgetState extends State<ProductWidget> {
     return Padding(
       padding: const EdgeInsets.all(0.0),
       child: GestureDetector(
-        onTap: () {
-          log("ToDo add the navigate to the product details screen");
+        onTap: () async {
+          await Navigator.pushNamed(context, ProductDetailsScreen.routeName);
         },
         child: Column(
           children: [

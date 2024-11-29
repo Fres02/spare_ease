@@ -47,7 +47,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
         ),
         child: FloatingActionButton(
           onPressed: _onFabPressed,
-          backgroundColor: Color(0xFF7E3DFF),
+          backgroundColor: Color(0xFFF7C910),
           shape: CircleBorder(),
           elevation: 0,
           child: Image.asset(
@@ -65,7 +65,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
         ),
         child: BottomNavigationBar(
           backgroundColor: Color(0xFFFCFCFC),
-          selectedItemColor: Color(0xFF7E3DFF),
+          selectedItemColor: Color(0xFFF7C910),
           unselectedItemColor: Color(0xFF9CA3AF),
           type: BottomNavigationBarType.fixed,
           currentIndex: _selectedIndex,
@@ -123,7 +123,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
                   ),
                 ],
               ),
-              label: 'My Orders',
+              label: 'Cart',
             ),
             BottomNavigationBarItem(
               icon: Icon(

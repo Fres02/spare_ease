@@ -15,14 +15,6 @@ class EmptyCartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.amber,
-        centerTitle: true,
-        title: const Text(
-          "My Cart",
-          textAlign: TextAlign.center,
-        ),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(

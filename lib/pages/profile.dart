@@ -1,8 +1,10 @@
-import 'package:iconly/iconly.dart';
 import 'package:flutter/material.dart';
 import 'package:spare_ease/components/assets_manager.dart';
+import 'package:spare_ease/components/my_app_functions.dart';
 import 'package:spare_ease/components/subtitle_text.dart';
 import 'package:spare_ease/components/title_text.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:spare_ease/pages/placed_orders.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -12,6 +14,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  bool isLoggedIn = true; // Simulating login status for demo
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +27,7 @@ class _ProfilePageState extends State<ProfilePage> {
             AssetsManager.shoppingCart,
           ),
         ),
-        title: Text(
+        title: const Text(
           "Profile",
           style: TextStyle(fontWeight: FontWeight.w500),
         ),
@@ -32,114 +36,105 @@ class _ProfilePageState extends State<ProfilePage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Visibility(
-            visible: false,
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
+          Visibility(
+            visible: !isLoggedIn,
+            child: const Padding(
+              padding: EdgeInsets.all(18.0),
               child: TitlesTextWidget(
-                label: "Please login",
+                label: "Please login to have unlimited access",
               ),
             ),
           ),
           Visibility(
-            visible: true, // Corrected syntax
+            visible: isLoggedIn,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               child: Row(
                 children: [
-                  Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Theme.of(context).cardColor,
-                      border: Border.all(
-                          color: Theme.of(context).colorScheme.background,
-                          width: 3),
-                      image: DecorationImage(
-                        image: NetworkImage(
-                          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
-                        ),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
+                  const SizedBox(width: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
-                      TitlesTextWidget(label: "Hadi Kachar"),
-                      SizedBox(
-                        height: 6,
-                      ),
-                      SubtitleTextWidget(label: "Coding.with.@gmail")
+                      SizedBox(height: 10),
+                      TitlesTextWidget(label: "Hadi Kachmar"),
+                      SizedBox(height: 6),
+                      SubtitleTextWidget(label: "Coding.with.hadi@gmail.com"),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
           ),
-          const SizedBox(
-            height: 15,
-          ),
+          const SizedBox(height: 15),
           Padding(
             padding: const EdgeInsets.all(14.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const TitlesTextWidget(
-                  label: "General",
-                ),
-                const SizedBox(
-                  height: 10,
+                const Divider(thickness: 1),
+                const SizedBox(height: 10),
+                const SizedBox(height: 10),
+                CustomListTile(
+                  text: "All Orders",
+                  imagePath: AssetsManager.orderSvg,
+                  function: () => Navigator.pushNamed(
+                    context,
+                    PlacedOrdersScreen
+                        .routeName, // Replace with actual route name
+                  ),
                 ),
                 CustomListTile(
-                    text: "All Orders",
-                    imagePath: AssetsManager.orderSvg,
-                    function: () {}),
-                CustomListTile(
-                    text: "Wishlist",
-                    imagePath: AssetsManager.orderSvg,
-                    function: () {}),
-                CustomListTile(
-                    text: "Recent",
-                    imagePath: AssetsManager.orderSvg,
-                    function: () {}),
-                CustomListTile(
-                    text: "Address",
-                    imagePath: AssetsManager.orderSvg,
-                    function: () {}),
-                const SizedBox(
-                  height: 6,
+                  text: "Wishlist",
+                  imagePath: AssetsManager.wishlistSvg,
+                  function: () {
+                    // Implement functionality
+                  },
                 ),
-                const Divider(thickness: 5),
-                const SizedBox(
-                  height: 6,
+                CustomListTile(
+                  text: "Viewed Recently",
+                  imagePath: AssetsManager.recent,
+                  function: () {
+                    // Implement functionality
+                  },
                 ),
-                const TitlesTextWidget(
-                  label: "Settings",
+                CustomListTile(
+                  text: "Address",
+                  imagePath: AssetsManager.address,
+                  function: () {
+                    // Implement functionality
+                  },
                 ),
-                const SizedBox(
-                  height: 10,
-                )
+                const SizedBox(height: 6),
+                const Divider(thickness: 1),
+                const SizedBox(height: 6),
               ],
             ),
           ),
           Center(
-            child: ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(
-                    30.0,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14.0),
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
                   ),
                 ),
+                icon: const Icon(Icons.logout),
+                label: const Text("Logout"),
+                onPressed: () async {
+                  await MyAppFunctions.showErrorOrWarningDialog(
+                    context: context,
+                    subtitle: "Are you sure you want to logout?",
+                    fct: () {
+                      setState(() {
+                        isLoggedIn = false; // Simulating logout
+                      });
+                    },
+                    isError: false,
+                  );
+                },
               ),
-              onPressed: () {},
-              icon: const Icon(Icons.login),
-              label: const Text("Login"),
             ),
           ),
         ],
@@ -157,19 +152,18 @@ class CustomListTile extends StatelessWidget {
   });
 
   final String imagePath, text;
-  final Function function;
+  final VoidCallback function;
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () {
-        function();
-      },
+      onTap: function,
       title: SubtitleTextWidget(label: text),
       leading: Image.asset(
         imagePath,
         height: 34,
       ),
-      trailing: const Icon(IconlyLight.arrow_right_2),
+      trailing: const Icon(IconlyLight.arrowRight2),
     );
   }
 }
