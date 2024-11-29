@@ -12,10 +12,6 @@ class LoginController extends GetxController {
   late final FocusNode emailFocusNode;
   late final FocusNode passwordFocusNode;
 
-  GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
-
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
   var isLoading = false.obs;
 
   @override
@@ -40,7 +36,11 @@ class LoginController extends GetxController {
     super.onClose();
   }
 
-  Future<void> login(BuildContext context) async {
+  Future<void> login(GlobalKey<FormState> formKey) async {
+    final isValid = formKey.currentState?.validate() ?? false;
+  }
+
+/*  Future<void> login(BuildContext context) async {
     if (loginFormKey.currentState?.validate() ?? false) {
       final email = emailController.text.trim();
       final password = passwordController.text.trim();
@@ -72,5 +72,5 @@ class LoginController extends GetxController {
             colorText: Colors.white);
       }
     }
-  }
+  } */
 }

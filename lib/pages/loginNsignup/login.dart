@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+  static const routeName = "/Login";
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -23,6 +24,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   final LoginController controller = Get.put(LoginController());
+  final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 50),
                   Form(
-                    key: controller.loginFormKey,
+                    key: loginFormKey,
                     child: Column(
                       children: [
                         CustomTextField(
@@ -140,7 +142,7 @@ class _LoginPageState extends State<LoginPage> {
                           ],
                         ),
                         const SizedBox(height: 16),
-                        const LoginButton(),
+                        LoginButton(formKey: loginFormKey),
                         const SizedBox(height: 16),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

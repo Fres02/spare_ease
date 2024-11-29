@@ -23,8 +23,7 @@ class SignupController extends GetxController {
   final addressFocusNode = FocusNode();
   final contactNumberFocusNode = FocusNode();
 
-  final GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
-  final auth = FirebaseAuth.instance;
+  // final auth = FirebaseAuth.instance;
 
   var isLoading = false.obs;
 
@@ -49,7 +48,9 @@ class SignupController extends GetxController {
     super.onClose();
   }
 
-  Future<void> signup() async {
+  Future<void> signup(BuildContext context) async {}
+
+  /* Future<void> signup() async {
     if (!signupFormKey.currentState!.validate()) {
       Fluttertoast.showToast(
         msg: "Please fill all fields correctly",
@@ -105,5 +106,5 @@ class SignupController extends GetxController {
     } finally {
       isLoading.value = false;
     }
-  }
+  } */
 }

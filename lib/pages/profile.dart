@@ -4,9 +4,17 @@ import 'package:spare_ease/components/my_app_functions.dart';
 import 'package:spare_ease/components/subtitle_text.dart';
 import 'package:spare_ease/components/title_text.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:spare_ease/pages/placed_orders.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  bool isLoggedIn = true; // Simulating login status for demo
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +27,7 @@ class ProfilePage extends StatelessWidget {
             AssetsManager.shoppingCart,
           ),
         ),
-        title: Text(
+        title: const Text(
           "Profile",
           style: TextStyle(fontWeight: FontWeight.w500),
         ),
@@ -28,9 +36,9 @@ class ProfilePage extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Visibility(
-            visible: false,
-            child: Padding(
+          Visibility(
+            visible: !isLoggedIn,
+            child: const Padding(
               padding: EdgeInsets.all(18.0),
               child: TitlesTextWidget(
                 label: "Please login to have unlimited access",
@@ -38,99 +46,95 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
           Visibility(
-            visible: true,
+            visible: isLoggedIn,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               child: Row(
                 children: [
-                  const SizedBox(
-                    width: 10,
-                  ),
+                  const SizedBox(width: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
                       SizedBox(height: 10),
                       TitlesTextWidget(label: "Hadi Kachmar"),
-                      SizedBox(
-                        height: 6,
-                      ),
-                      SubtitleTextWidget(label: "Coding.with.hadi@gmail.com")
+                      SizedBox(height: 6),
+                      SubtitleTextWidget(label: "Coding.with.hadi@gmail.com"),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
           ),
-          const SizedBox(
-            height: 15,
-          ),
+          const SizedBox(height: 15),
           Padding(
             padding: const EdgeInsets.all(14.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Divider(
-                  thickness: 1,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const TitlesTextWidget(
-                  label: "General",
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
+                const Divider(thickness: 1),
+                const SizedBox(height: 10),
+                const SizedBox(height: 10),
                 CustomListTile(
-                  text: "All Order",
+                  text: "All Orders",
                   imagePath: AssetsManager.orderSvg,
-                  function: () {},
+                  function: () => Navigator.pushNamed(
+                    context,
+                    PlacedOrdersScreen
+                        .routeName, // Replace with actual route name
+                  ),
                 ),
                 CustomListTile(
                   text: "Wishlist",
                   imagePath: AssetsManager.wishlistSvg,
-                  function: () {},
+                  function: () {
+                    // Implement functionality
+                  },
                 ),
                 CustomListTile(
-                  text: "Viewed recently",
+                  text: "Viewed Recently",
                   imagePath: AssetsManager.recent,
-                  function: () {},
+                  function: () {
+                    // Implement functionality
+                  },
                 ),
                 CustomListTile(
                   text: "Address",
                   imagePath: AssetsManager.address,
-                  function: () {},
+                  function: () {
+                    // Implement functionality
+                  },
                 ),
                 const SizedBox(height: 6),
-                const Divider(
-                  thickness: 1,
-                ),
+                const Divider(thickness: 1),
                 const SizedBox(height: 6),
-                const TitlesTextWidget(
-                  label: "Settings",
-                ),
               ],
             ),
           ),
           Center(
-            child: ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(
-                    30.0,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14.0),
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
                   ),
                 ),
-              ),
-              icon: const Icon(Icons.login),
-              label: const Text("Login"),
-              onPressed: () async {
-                await MyAppFunctions.showErrorOrWarningDialog(
+                icon: const Icon(Icons.logout),
+                label: const Text("Logout"),
+                onPressed: () async {
+                  await MyAppFunctions.showErrorOrWarningDialog(
                     context: context,
-                    subtitle: "Are you sure you want to logout",
-                    fct: () {},
-                    isError: false);
-              },
+                    subtitle: "Are you sure you want to logout?",
+                    fct: () {
+                      setState(() {
+                        isLoggedIn = false; // Simulating logout
+                      });
+                    },
+                    isError: false,
+                  );
+                },
+              ),
             ),
           ),
         ],
@@ -146,14 +150,14 @@ class CustomListTile extends StatelessWidget {
     required this.text,
     required this.function,
   });
+
   final String imagePath, text;
-  final Function function;
+  final VoidCallback function;
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () {
-        function();
-      },
+      onTap: function,
       title: SubtitleTextWidget(label: text),
       leading: Image.asset(
         imagePath,

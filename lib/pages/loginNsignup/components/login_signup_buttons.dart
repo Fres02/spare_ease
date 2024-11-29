@@ -87,8 +87,9 @@ class LoginSignupButtons extends StatelessWidget {
 }
 
 class LoginButton extends StatelessWidget {
-  const LoginButton({super.key});
+  final GlobalKey<FormState> formKey;
 
+  const LoginButton({required this.formKey, super.key});
   @override
   Widget build(BuildContext context) {
     final LoginController controller = Get.find<LoginController>();
@@ -114,7 +115,7 @@ class LoginButton extends StatelessWidget {
             color: Color(0xFFF7C910),
           ),
         ),
-        onPressed: () => controller.login(context),
+        onPressed: () => controller.login(formKey),
         child: const Text(
           'Log In',
           style: TextStyle(
@@ -130,7 +131,9 @@ class LoginButton extends StatelessWidget {
 
 class SignupButton extends StatelessWidget {
   final SignupController controller = Get.find<SignupController>();
-  SignupButton({super.key});
+  final GlobalKey<FormState> formKey;
+
+  SignupButton({required this.formKey, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -155,7 +158,7 @@ class SignupButton extends StatelessWidget {
             color: Color.fromARGB(255, 255, 255, 255),
           ),
         ),
-        onPressed: () => controller.signup(),
+        onPressed: () => controller.signup(context),
         child: controller.isLoading.value
             ? const CircularProgressIndicator(color: Colors.white)
             : const Text(
