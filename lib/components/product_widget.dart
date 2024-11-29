@@ -10,8 +10,13 @@ import 'package:spare_ease/components/subtitle_text.dart';
 import 'package:spare_ease/components/title_text.dart';
 
 class ProductWidget extends StatefulWidget {
-  const ProductWidget({super.key});
-
+  const ProductWidget({
+    super.key,
+    this.image,
+    this.title,
+    this.price,
+  });
+  final String? image, title, price;
   @override
   State<ProductWidget> createState() => _ProductWidgetState();
 }
@@ -31,7 +36,7 @@ class _ProductWidgetState extends State<ProductWidget> {
             ClipRRect(
               borderRadius: BorderRadius.circular(12.0),
               child: FancyShimmerImage(
-                imageUrl: AppConstants.imageUrl,
+                imageUrl: widget.image ?? AppConstants.imageUrl,
                 height: size.height * 0.22,
                 width: double.infinity,
               ),
@@ -46,7 +51,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                   Flexible(
                     flex: 5,
                     child: TitlesTextWidget(
-                      label: "Title " * 10,
+                      label: widget.title ?? "Title " * 10,
                       fontSize: 18,
                       maxLines: 2,
                     ),
@@ -87,7 +92,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                                 width: 2), // Space between "LKR" and the value
                           ),
                           TextSpan(
-                            text: "1550.00",
+                            text: widget.price ?? "1550.00",
                             style: TextStyle(
                               fontSize: 16, // Regular font size
                               fontWeight: FontWeight.w600,
