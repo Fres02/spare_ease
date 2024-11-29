@@ -43,29 +43,28 @@ class ProductModel with ChangeNotifier {
   static List<ProductModel> products = [
     ProductModel(
       //1
-      productId: 'iphone14-128gb-black',
-      productTitle: "Apple iPhone 14 Pro (128GB) - Black",
-      productPrice: "1399.99",
-      productCategory: "Phones",
-      productBrand: "Apple",
+      productId: 'dhara-12v5-3B',
+      productTitle: "Dhara Bike Battery 12V5-3B",
+      productPrice: "5,350",
+      productCategory: "Battery",
+      productBrand: "Dhara",
       productDescription:
-          "6.1-inch Super Retina XDR display with ProMotion and always-on display. Dynamic Island, a new and magical way to interact with your iPhone. 48MP main camera for up to 4x higher resolution. Cinematic mode, now in 4K Dolby Vision up to 30 fps. Action mode, for stable and smooth videos when you're on the move. Accident detection, vital safety technology that calls for help for you. All-day battery life and up to 23 hours of video playback.",
-      productImage: "https://i.ibb.co/BtMBSgK/1-iphone14-128gb-black.webp",
+          "Discover 100/125/135, Pulser 135, Tvs Scooter Pep, Wego, Glammer, Fz V1\n 1 Year Company Warranty\n Nominal Voltage (V)-12\n Capacity (Ah)-5\n CCA (A)-90\n Dimensions (mm)	Length-120\n Height-130\n Width	60\n Wet Weight-(Kg)	2.0",
+      productImage:
+          "https://static-01.daraz.lk/p/2aa94d5043157e1e8d2935059d28850b.jpg",
       productQuantity: "10",
     ),
     ProductModel(
-      //6
       productId: const Uuid().v4(),
-      productTitle:
-          "OnePlus 9 Pro 5G LE2120 256GB 12GB RAM Factory Unlocked (GSM Only | No CDMA - not Compatible with Verizon/Sprint) International Version - Morning Mist",
-      productPrice: "1099.99",
-      productCategory: "Phones",
-      productBrand: "Apple",
+      productTitle: "Dhara Bike Battery 12V9-2A",
+      productPrice: "8,750",
+      productCategory: "Battery",
+      productBrand: "Dhara",
       productDescription:
-          "About this item\n6.7 inch LTPO Fluid2 AMOLED, 1B colors, 120Hz, HDR10+, 1300 nits (peak)\n256GB internal storage, 12GB RAM\nQuad rear camera: 48MP, 50MP, 8MP, 2MP\n16MP front-facing camera\n4500mAh battery with Warp Charge 65T (10V/6.5A) and 50W Wireless Charging\n5G capable for lightning fast download and streaming",
+          "Discover 100/125/135, Pulser 135, Tvs Scooter Pep, Wego \n 1 Year Company Warranty\n Nominal Voltage (V)-12\n Capacity (Ah)-9\n CCA (A)-100\n Dimensions (mm)	Length-120\n Height-130\n Width	60\n Wet Weight-(Kg)	2.1",
       productImage:
-          "https://i.ibb.co/0yhgKVv/6-One-Plus-9-Pro-5-G-LE2120-256-GB-12-GB-RAM.png",
-      productQuantity: "3636",
+          "https://bambuwa.lk/wp-content/uploads/2023/11/WhatsApp-Image-2023-11-22-at-15.14.05_35f7012a.jpg",
+      productQuantity: "10",
     )
   ];
 }
