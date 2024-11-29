@@ -23,4 +23,5 @@ class ProductModel with ChangeNotifier {
     required this.productBrand,
     this.createdAt,
   });
+
 }
