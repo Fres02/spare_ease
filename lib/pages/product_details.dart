@@ -19,97 +19,116 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              if (Navigator.canPop(context)) {
-                Navigator.pop(context);
-              }
-            },
-            icon: Icon(
-              Icons.arrow_back_ios,
-            ),
-          ),
-          backgroundColor: Colors.amberAccent,
-          centerTitle: true,
-          title: const AppNameTextWidget(
-            fontSize: 30,
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            if (Navigator.canPop(context)) {
+              Navigator.pop(context);
+            }
+          },
+          icon: Icon(
+            Icons.arrow_back_ios,
           ),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              FancyShimmerImage(
-                imageUrl: AppConstants.imageUrl,
-                height: size.height * 0.22,
-                width: double.infinity,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Flexible(
-                      child: Text("Title" * 18,
-                          softWrap: true,
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold)),
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    Flexible(
-                      flex: 1,
-                      child: RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: "LKR",
-                              style: TextStyle(
-                                fontSize: 10, // Smaller font size
-                                fontWeight: FontWeight.w600,
-                                color: Colors.blue,
-                              ),
+        backgroundColor: Colors.amberAccent,
+        centerTitle: true,
+        title: const AppNameTextWidget(
+          fontSize: 30,
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            FancyShimmerImage(
+              imageUrl: AppConstants.imageUrl,
+              height: size.height * 0.22,
+              width: double.infinity,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Flexible(
+                    child: Text("Title" * 18,
+                        softWrap: true,
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold)),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Flexible(
+                    flex: 1,
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "LKR",
+                            style: TextStyle(
+                              fontSize: 10, // Smaller font size
+                              fontWeight: FontWeight.w600,
+                              color: Colors.blue,
                             ),
-                            WidgetSpan(
-                              child: SizedBox(
-                                  width:
-                                      2), // Space between "LKR" and the value
+                          ),
+                          WidgetSpan(
+                            child: SizedBox(
+                                width: 2), // Space between "LKR" and the value
+                          ),
+                          TextSpan(
+                            text: "1550.00",
+                            style: TextStyle(
+                              fontSize: 16, // Regular font size
+                              fontWeight: FontWeight.w600,
+                              color: Colors.blue,
                             ),
-                            TextSpan(
-                              text: "1550.00",
-                              style: TextStyle(
-                                fontSize: 16, // Regular font size
-                                fontWeight: FontWeight.w600,
-                                color: Colors.blue,
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TitlesTextWidget(label: "About this item"),
+                  SubtitleTextWidget(label: "In Phone")
+                ],
+              ),
+            ),
+            const SizedBox(height: 15),
+            SubtitleTextWidget(label: "Description" * 15),
+            const SizedBox(height: 15),
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color.fromRGBO(75, 62, 53, 1),
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+                elevation: 5,
+              ),
+              child: Text(
+                "Add to Cart",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TitlesTextWidget(label: "About this item"),
-                    SubtitleTextWidget(label: "In Phone")
-                  ],
-                ),
-              ),
-              Row(
-                children: [],
-              ),
-            ],
-          ),
-        ));
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

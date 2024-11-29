@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spare_ease/components/assets_manager.dart';
+import 'package:spare_ease/components/my_app_functions.dart';
 import 'package:spare_ease/components/subtitle_text.dart';
 import 'package:spare_ease/components/title_text.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
@@ -121,9 +122,15 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
               ),
-              onPressed: () {},
               icon: const Icon(Icons.login),
               label: const Text("Login"),
+              onPressed: () async {
+                await MyAppFunctions.showErrorOrWarningDialog(
+                    context: context,
+                    subtitle: "Are you sure you want to logout",
+                    fct: () {},
+                    isError: false);
+              },
             ),
           ),
         ],
