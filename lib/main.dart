@@ -6,6 +6,7 @@ import 'package:spare_ease/pages/loginNsignup/signup.dart';
 import 'package:spare_ease/pages/my_bottom_navigation_bar.dart';
 import 'package:spare_ease/pages/placed_orders.dart';
 import 'package:spare_ease/pages/product_details.dart';
+import 'package:spare_ease/providers/cart_provider.dart';
 import 'package:spare_ease/providers/products_provider.dart';
 import 'package:spare_ease/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,6 +27,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) {
           return ProductsProvider();
+        }),
+        ChangeNotifierProvider(create: (_) {
+          return CartProvider();
         })
       ],
       child: MaterialApp(

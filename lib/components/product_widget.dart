@@ -11,6 +11,7 @@ import 'package:spare_ease/components/subtitle_text.dart';
 import 'package:spare_ease/components/title_text.dart';
 import 'package:spare_ease/models/product_model.dart';
 import 'package:spare_ease/pages/product_details.dart';
+import 'package:spare_ease/providers/cart_provider.dart';
 import 'package:spare_ease/providers/products_provider.dart';
 
 class ProductWidget extends StatefulWidget {
@@ -28,6 +29,8 @@ class _ProductWidgetState extends State<ProductWidget> {
   @override
   Widget build(BuildContext context) {
     //final productsModelProvider = Provider.of<ProductModel>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
+
     final productsProvider = Provider.of<ProductsProvider>(context);
     final getCurrentProduct = productsProvider.findById(widget.productId);
 
@@ -135,15 +138,29 @@ class _ProductWidgetState extends State<ProductWidget> {
                         Flexible(
                           child: Material(
                             borderRadius: BorderRadius.circular(12.0),
-                            color: Colors.amber,
+                            color: Colors.amberAccent,
                             child: InkWell(
                               borderRadius: BorderRadius.circular(12.0),
-                              onTap: () {},
+                              onTap: () {
+                                if (cartProvider.isProdinCart(
+                                    productId: getCurrentProduct.productId)) {
+                                  return;
+                                }
+                                cartProvider.addProductToCart(
+                                    productId: getCurrentProduct.productId);
+                              },
                               splashColor: Color.fromRGBO(75, 62, 53, 1),
-                              child: const Padding(
-                                padding: EdgeInsets.all(6.0),
-                                child: Icon(Icons.add_shopping_cart_outlined,
-                                    size: 20),
+                              child: Padding(
+                                padding: const EdgeInsets.all(6.0),
+                                child: Icon(
+                                  cartProvider.isProdinCart(
+                                          productId:
+                                              getCurrentProduct.productId)
+                                      ? Icons.check
+                                      : Icons.add_shopping_cart_outlined,
+                                  size: 20,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),

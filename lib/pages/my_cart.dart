@@ -3,6 +3,8 @@ import 'package:spare_ease/components/assets_manager.dart';
 import 'package:spare_ease/components/bottom_checkout.dart';
 import 'package:spare_ease/components/cart_widget.dart';
 import 'package:spare_ease/components/empty_cart.dart';
+import 'package:provider/provider.dart';
+import 'package:spare_ease/providers/cart_provider.dart';
 
 class MyCartPage extends StatefulWidget {
   const MyCartPage({super.key});
@@ -15,7 +17,9 @@ class MyCartPage extends StatefulWidget {
 class _MyCartPageState extends State<MyCartPage> {
   @override
   Widget build(BuildContext context) {
-    return widget.isEmpty
+    final cartProvider = Provider.of<CartProvider>(context);
+
+    return cartProvider.getCartitems.isEmpty
         ? Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.amberAccent,
@@ -48,7 +52,7 @@ class _MyCartPageState extends State<MyCartPage> {
                 ),
               ),
               title: Text(
-                "Cart",
+                "Cart (${cartProvider.getCartitems.length})",
                 style: TextStyle(fontWeight: FontWeight.w500),
               ),
               actions: [
@@ -63,7 +67,7 @@ class _MyCartPageState extends State<MyCartPage> {
               centerTitle: true,
             ),
             body: ListView.builder(
-              itemCount: 10,
+              itemCount: cartProvider.getCartitems.length,
               itemBuilder: (context, index) {
                 return CartWidget();
               },
