@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spare_ease/models/cart_model.dart';
+import 'package:spare_ease/providers/products_provider.dart';
 import 'package:uuid/uuid.dart';
 
 class CartProvider with ChangeNotifier {
@@ -17,7 +18,51 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void updateQty({required String productId, required int qty}) {
+    _cartItems.update(
+      productId,
+      (cartItem) => CartModel(
+        cartId: cartItem.cartId,
+        productId: productId,
+        quantity: qty,
+      ),
+    );
+    notifyListeners();
+  }
+
   bool isProdinCart({required String productId}) {
     return _cartItems.containsKey(productId);
+  }
+
+  double getTotal({required ProductsProvider productsProvider}) {
+    double total = 0.0;
+
+    _cartItems.forEach((key, value) {
+      final getCurrProduct = productsProvider.findById(value.productId);
+      if (getCurrProduct == null) {
+        total += 0;
+      } else {
+        total += double.parse(getCurrProduct.productPrice) * value.quantity;
+      }
+    });
+    return total;
+  }
+
+  int getQty() {
+    int total = 0;
+    _cartItems.forEach((key, value) {
+      total += value.quantity;
+    });
+    return total;
+  }
+
+  void clearLocalCart() {
+    _cartItems.clear();
+    notifyListeners();
+  }
+
+  void removeOneItem({required String productId}) {
+    _cartItems.remove(productId);
+    notifyListeners();
   }
 }

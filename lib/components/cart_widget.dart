@@ -16,123 +16,128 @@ class CartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
-    return FittedBox(
-      child: IntrinsicWidth(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(12.0),
-                child: FancyShimmerImage(
-                  imageUrl:
-                      'https://images.unsplash.com/photo-1465572089651-8fde36c892dd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-                  height: size.height * 0.2,
-                  width: size.height * 0.2,
-                ),
-              ),
-              SizedBox(width: 20),
-              IntrinsicWidth(
-                child: Column(
+    final cartModel = Provider.of<CartModel>(context);
+    final productsProvider = Provider.of<ProductsProvider>(context);
+    final getCurrentProduct = productsProvider.findById(cartModel.productId);
+    return getCurrentProduct == null
+        ? const SizedBox.shrink()
+        : FittedBox(
+            child: IntrinsicWidth(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: size.width * 0.6,
-                          child: TitlesTextWidget(
-                            label: 'Title' * 10,
-                            maxLines: 2,
-                          ),
-                        ),
-                        Column(
-                          children: [
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.clear_rounded,
-                                color: Colors.red,
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                IconlyLight.heart,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12.0),
+                      child: FancyShimmerImage(
+                        imageUrl: getCurrentProduct.productImage,
+                        height: size.height * 0.2,
+                        width: size.height * 0.2,
+                      ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        RichText(
-                          text: TextSpan(
+                    SizedBox(width: 20),
+                    IntrinsicWidth(
+                      child: Column(
+                        children: [
+                          Row(
                             children: [
-                              TextSpan(
-                                text: "LKR",
-                                style: TextStyle(
-                                  fontSize: 10, // Smaller font size for "LKR"
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.lightBlue,
+                              SizedBox(
+                                width: size.width * 0.6,
+                                child: TitlesTextWidget(
+                                  label: getCurrentProduct.productTitle,
+                                  maxLines: 2,
                                 ),
                               ),
-                              WidgetSpan(
-                                child: SizedBox(
-                                    width:
-                                        2), // Space between "LKR" and the value
-                              ),
-                              TextSpan(
-                                text: "16.00",
-                                style: TextStyle(
-                                  fontSize:
-                                      20, // Regular font size for the value
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.lightBlue,
-                                ),
+                              Column(
+                                children: [
+                                  IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      Icons.clear_rounded,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      IconlyLight.heart,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
-                        ),
-                        OutlinedButton.icon(
-                          onPressed: () async {
-                            await showModalBottomSheet(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(30),
-                                  topRight: Radius.circular(30),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: "LKR",
+                                      style: TextStyle(
+                                        fontSize:
+                                            10, // Smaller font size for "LKR"
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.lightBlue,
+                                      ),
+                                    ),
+                                    WidgetSpan(
+                                      child: SizedBox(
+                                          width:
+                                              2), // Space between "LKR" and the value
+                                    ),
+                                    TextSpan(
+                                      text: getCurrentProduct.productPrice,
+                                      style: TextStyle(
+                                        fontSize:
+                                            20, // Regular font size for the value
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.lightBlue,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              context: context,
-                              builder: (context) {
-                                return QuantityBottomSheetWidget();
-                              },
-                            );
-                          },
-                          icon: Icon(IconlyLight.arrowDown2),
-                          label: Text("Qty: 6"),
-                          style: OutlinedButton.styleFrom(
-                            side: BorderSide(
-                              width: 1,
-                              color: const Color.fromARGB(255, 198, 198, 198),
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                        )
-                      ],
+                              OutlinedButton.icon(
+                                onPressed: () async {
+                                  await showModalBottomSheet(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(30),
+                                        topRight: Radius.circular(30),
+                                      ),
+                                    ),
+                                    context: context,
+                                    builder: (context) {
+                                      return QuantityBottomSheetWidget();
+                                    },
+                                  );
+                                },
+                                icon: Icon(IconlyLight.arrowDown2),
+                                label: Text("Qty: ${cartModel.quantity}"),
+                                style: OutlinedButton.styleFrom(
+                                  side: BorderSide(
+                                    width: 1,
+                                    color: const Color.fromARGB(
+                                        255, 198, 198, 198),
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     )
                   ],
                 ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
+              ),
+            ),
+          );
   }
 }
     //final cartModel = Provider.of<CartModel>(context);

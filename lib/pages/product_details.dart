@@ -1,9 +1,7 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spare_ease/components/app_constants.dart';
 import 'package:spare_ease/components/app_name_text.dart';
-import 'package:spare_ease/components/assets_manager.dart';
 import 'package:spare_ease/components/subtitle_text.dart';
 import 'package:spare_ease/components/title_text.dart';
 import 'package:spare_ease/providers/cart_provider.dart';
@@ -49,7 +47,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 children: [
                   // Product Image
                   FancyShimmerImage(
-                    imageUrl: AppConstants.imageUrl,
+                    imageUrl: getCurrentProduct.productImage,
                     height: size.height * 0.3,
                     width: double.infinity,
                     boxFit: BoxFit.cover,
