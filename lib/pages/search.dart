@@ -46,13 +46,15 @@ class _SearchPageState extends State<SearchPage> {
       },
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.amberAccent,
           leading: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(10.0),
             child: Image.asset(
               AssetsManager.shoppingCart,
             ),
           ),
           title: TitlesTextWidget(label: passedCategory ?? "Search products"),
+          centerTitle: true,
         ),
         body: productList.isEmpty
             ? const Center(child: TitlesTextWidget(label: "No product found"))
