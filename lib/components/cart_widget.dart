@@ -19,6 +19,8 @@ class CartWidget extends StatelessWidget {
     final cartModel = Provider.of<CartModel>(context);
     final productsProvider = Provider.of<ProductsProvider>(context);
     final getCurrentProduct = productsProvider.findById(cartModel.productId);
+    final cartProvider = Provider.of<CartProvider>(context);
+
     return getCurrentProduct == null
         ? const SizedBox.shrink()
         : FittedBox(
@@ -52,7 +54,11 @@ class CartWidget extends StatelessWidget {
                               Column(
                                 children: [
                                   IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      cartProvider.removeOneItem(
+                                          productId:
+                                              getCurrentProduct.productId);
+                                    },
                                     icon: Icon(
                                       Icons.clear_rounded,
                                       color: Colors.red,
@@ -111,7 +117,9 @@ class CartWidget extends StatelessWidget {
                                     ),
                                     context: context,
                                     builder: (context) {
-                                      return QuantityBottomSheetWidget();
+                                      return QuantityBottomSheetWidget(
+                                        cartModel: cartModel,
+                                      );
                                     },
                                   );
                                 },

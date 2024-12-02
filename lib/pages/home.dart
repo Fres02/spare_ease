@@ -1,11 +1,13 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:spare_ease/components/app_name_text.dart';
 import 'package:spare_ease/components/assets_manager.dart';
 import 'package:spare_ease/components/category_rounded_widget.dart';
 import 'package:spare_ease/components/latest_arrival.dart';
 import 'package:spare_ease/components/title_text.dart';
 import 'package:spare_ease/components/app_constants.dart';
+import 'package:spare_ease/providers/products_provider.dart';
 
 class Home extends StatelessWidget {
   static const routName = "/HomePage";
@@ -14,6 +16,8 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productsProvider = Provider.of<ProductsProvider>(context);
+
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -64,7 +68,9 @@ class Home extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     itemCount: 10,
                     itemBuilder: (context, index) {
-                      return LatestArrivalProductsWidget();
+                      return ChangeNotifierProvider.value(
+                          value: productsProvider.getProducts[index],
+                          child: LatestArrivalProductsWidget());
                     }),
               ),
               const TitlesTextWidget(label: "Categories"),
@@ -106,6 +112,7 @@ class Home extends StatelessWidget {
                   ],
                 ),
               ),
+              const SizedBox(height: 30),
             ],
           ),
         ),

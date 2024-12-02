@@ -130,36 +130,45 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   const SizedBox(height: 20),
 
                   // Add to Cart Button
-                  Center(
-                    child: ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromRGBO(75, 62, 53, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromRGBO(75, 62, 53, 1),
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                          ),
+                          onPressed: () {
+                            if (cartProvider.isProdinCart(
+                                productId: getCurrentProduct.productId)) {
+                              return;
+                            }
+                            cartProvider.addProductToCart(
+                                productId: getCurrentProduct.productId);
+                          },
+                          icon: Icon(
+                            cartProvider.isProdinCart(
+                                    productId: getCurrentProduct.productId)
+                                ? Icons.check
+                                : Icons.add_shopping_cart_outlined,
+                          ),
+                          label: Text(
+                            cartProvider.isProdinCart(
+                                    productId: getCurrentProduct.productId)
+                                ? "In cart"
+                                : "Add to cart",
+                          ),
                         ),
-                      ),
-                      onPressed: () {
-                        if (cartProvider.isProdinCart(
-                            productId: getCurrentProduct.productId)) {
-                          return;
-                        }
-                        cartProvider.addProductToCart(
-                            productId: getCurrentProduct.productId);
-                      },
-                      icon: Icon(
-                        cartProvider.isProdinCart(
-                                productId: getCurrentProduct.productId)
-                            ? Icons.check
-                            : Icons.add_shopping_cart_outlined,
-                      ),
-                      label: Text(
-                        cartProvider.isProdinCart(
-                                productId: getCurrentProduct.productId)
-                            ? "In cart"
-                            : "Add to cart",
                       ),
                     ),
                   ),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),

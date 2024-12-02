@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:spare_ease/pages/search.dart';
 import 'package:spare_ease/pages/home.dart';
 import 'package:spare_ease/pages/my_cart.dart';
 import 'package:spare_ease/pages/profile.dart';
 import 'package:spare_ease/pages/support.dart';
+import 'package:spare_ease/providers/cart_provider.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
   final int initialIndex; // Add this to receive the initial index
@@ -40,6 +42,8 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
+
     return Scaffold(
       body: _pages[_selectedIndex],
       backgroundColor: Colors.white,
@@ -116,8 +120,8 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
                         color: Colors.black,
                         shape: BoxShape.circle,
                       ),
-                      child: const Text(
-                        '5',
+                      child: Text(
+                        ("${cartProvider.getCartitems.length}"),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 12,

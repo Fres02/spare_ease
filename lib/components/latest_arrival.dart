@@ -1,6 +1,7 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
 import 'package:spare_ease/components/app_constants.dart';
 import 'package:spare_ease/components/subtitle_text.dart';
 import 'package:spare_ease/pages/product_details.dart';
@@ -16,11 +17,14 @@ class LatestArrivalProductsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final productsModel = Provider.of<ProductModel>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: () async {
-          await Navigator.pushNamed(context, ProductDetailsScreen.routeName);
+          await Navigator.pushNamed(context, ProductDetailsScreen.routeName,
+              arguments: productsModel.productId);
         },
         child: SizedBox(
           width: size.width * 0.45,
@@ -31,7 +35,7 @@ class LatestArrivalProductsWidget extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12.0),
                   child: FancyShimmerImage(
-                    imageUrl: AppConstants.imageUrl,
+                    imageUrl: productsModel.productImage,
                     height: size.width * 0.24,
                     width: size.width * 0.32,
                   ),
@@ -47,7 +51,7 @@ class LatestArrivalProductsWidget extends StatelessWidget {
                       height: 5,
                     ),
                     Text(
-                      "Title" * 15,
+                      productsModel.productTitle,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -55,15 +59,20 @@ class LatestArrivalProductsWidget extends StatelessWidget {
                       child: Row(
                         children: [
                           IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              IconlyLight.heart,
-                            ),
-                          ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.add_shopping_cart,
+                            onPressed: () {
+                              if (cartProvider.isProdinCart(
+                                  productId: productsModel.productId)) {
+                                return;
+                              }
+                              cartProvider.addProductToCart(
+                                  productId: productsModel.productId);
+                            },
+                            icon: Icon(
+                              cartProvider.isProdinCart(
+                                productId: productsModel.productId,
+                              )
+                                  ? Icons.check
+                                  : Icons.add_shopping_cart_outlined,
                             ),
                           ),
                         ],
@@ -87,7 +96,7 @@ class LatestArrivalProductsWidget extends StatelessWidget {
                                       2), // Space between "LKR" and the value
                             ),
                             TextSpan(
-                              text: "1500.00",
+                              text: productsModel.productPrice,
                               style: TextStyle(
                                 fontSize: 16, // Regular font size
                                 fontWeight: FontWeight.w600,
