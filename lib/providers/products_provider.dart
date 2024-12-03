@@ -45,10 +45,10 @@ class ProductsProvider with ChangeNotifier {
     ProductModel(
       //1
       productId: 'dhara-12v5-3B',
-      productTitle: "Dhara Bike Battery 12V5-3B",
-      productPrice: "5,350",
-      productCategory: "Battery",
-      productBrand: "Dhara",
+      productTitle: "Bajaj Bike Battery 12V5-3B",
+      productPrice: "5350.00",
+      productCategory: "Batteries",
+      productBrand: "Bajaj",
       productDescription:
           "Discover 100/125/135, Pulser 135, Tvs Scooter Pep, Wego, Glammer, Fz V1\n 1 Year Company Warranty\n Nominal Voltage (V)-12\n Capacity (Ah)-5\n CCA (A)-90\n Dimensions (mm)	Length-120\n Height-130\n Width	60\n Wet Weight-(Kg)	2.0",
       productImage:
@@ -57,10 +57,10 @@ class ProductsProvider with ChangeNotifier {
     ),
     ProductModel(
       productId: const Uuid().v4(),
-      productTitle: "Dhara Bike Battery 12V9-2A",
-      productPrice: "8,750",
-      productCategory: "Battery",
-      productBrand: "Dhara",
+      productTitle: "Yamaha Bike Battery 12V9-2A",
+      productPrice: "8750.00",
+      productCategory: "Batteries",
+      productBrand: "Yamaha",
       productDescription:
           "Discover 100/125/135, Pulser 135, Tvs Scooter Pep, Wego \n 1 Year Company Warranty\n Nominal Voltage (V)-12\n Capacity (Ah)-9\n CCA (A)-100\n Dimensions (mm)	Length-120\n Height-130\n Width	60\n Wet Weight-(Kg)	2.1",
       productImage:
@@ -70,8 +70,8 @@ class ProductsProvider with ChangeNotifier {
     ProductModel(
       productId: const Uuid().v4(),
       productTitle: "Exide MF5A-3-LT",
-      productPrice: "7,750",
-      productCategory: "Battery",
+      productPrice: "7750.00",
+      productCategory: "Batteries",
       productBrand: "Exide",
       productDescription:
           "Discover 100/125/135, Pulser 135, Tvs Scooter Pep, Wego \n 1 Year Company Warranty\n Nominal Voltage (V)-12\n Capacity (Ah)-5\n CCA (A)-100\n Dimensions (mm)	Length-120\n Height-130\n Width	60\n Wet Weight-(Kg)	2.1",
@@ -82,8 +82,8 @@ class ProductsProvider with ChangeNotifier {
     ProductModel(
       productId: const Uuid().v4(),
       productTitle: "Arpico Evergy Battery 12V 5AH",
-      productPrice: "5,500",
-      productCategory: "Battery",
+      productPrice: "5500.00",
+      productCategory: "Batteries",
       productBrand: "Arpico",
       productDescription:
           "HONDA DIO ON LIGHT, PLATINA NEW, S/START, SAFFARI, HERO HONDA NXG,CUSTOM (China),HERO HONDA NXG, S-STAR, HONDA NAVI.,CD 90 (CHINA), SUPER CUB, PRESS CUB, MD 90, CD 50, LX 48 CC \n Product Dimentions (Length x Width x Height)\n 12.4-6.4-13.6 CM",
@@ -94,7 +94,7 @@ class ProductsProvider with ChangeNotifier {
     ProductModel(
       productId: const Uuid().v4(),
       productTitle: "Led Light For Motorcycle Tail Indicator Turn Signal",
-      productPrice: "2,640",
+      productPrice: "2640.00",
       productCategory: "Lights",
       productBrand: "Mosaike Modifiable Accessories Co.Ltd",
       productDescription:
@@ -106,7 +106,7 @@ class ProductsProvider with ChangeNotifier {
     ProductModel(
       productId: const Uuid().v4(),
       productTitle: "Super Meteor Continental GT 650 Bike Light",
-      productPrice: "5,800",
+      productPrice: "5800.00",
       productCategory: "Lights",
       productBrand: "Mosaike Modifiable Accessories Co.Ltd",
       productDescription:
@@ -118,7 +118,7 @@ class ProductsProvider with ChangeNotifier {
     ProductModel(
       productId: const Uuid().v4(),
       productTitle: "Turn Signal Light Flowing Water Indicator Direction Lamp",
-      productPrice: "3,000",
+      productPrice: "3000.00",
       productCategory: "Lights",
       productBrand: "Mosaike Modifiable Accessories Co.Ltd",
       productDescription:
@@ -131,7 +131,7 @@ class ProductsProvider with ChangeNotifier {
       productId: const Uuid().v4(),
       productTitle:
           " Dual color Owl Design Moto 2 led laser work light fog light",
-      productPrice: "9,100",
+      productPrice: "9100.00",
       productCategory: "Lights",
       productBrand: "Mosaike Modifiable Accessories Co.Ltd",
       productDescription:
