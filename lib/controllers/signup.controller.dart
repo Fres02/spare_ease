@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:spare_ease/pages/home.dart';
 
 class SignupController extends GetxController {
-  static SignupController get instance => Get.find();
-
+  final signupFormKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
-  final addressController = TextEditingController();
   final contactNumberController = TextEditingController();
+  final addressController = TextEditingController();
 
   final emailFocusNode = FocusNode();
   final passwordFocusNode = FocusNode();
   final confirmPasswordFocusNode = FocusNode();
   final firstNameFocusNode = FocusNode();
   final lastNameFocusNode = FocusNode();
-  final addressFocusNode = FocusNode();
   final contactNumberFocusNode = FocusNode();
-
-  // final auth = FirebaseAuth.instance;
+  final addressFocusNode = FocusNode();
 
   var isLoading = false.obs;
+  var obscurePassword = true.obs;
+
+  final auth = FirebaseAuth.instance;
 
   @override
   void onClose() {
@@ -34,77 +34,52 @@ class SignupController extends GetxController {
     confirmPasswordController.dispose();
     firstNameController.dispose();
     lastNameController.dispose();
-    addressController.dispose();
     contactNumberController.dispose();
+    addressController.dispose();
 
     emailFocusNode.dispose();
     passwordFocusNode.dispose();
     confirmPasswordFocusNode.dispose();
     firstNameFocusNode.dispose();
     lastNameFocusNode.dispose();
-    addressFocusNode.dispose();
     contactNumberFocusNode.dispose();
+    addressFocusNode.dispose();
 
     super.onClose();
   }
 
-  Future<void> signup(BuildContext context) async {}
+  void togglePasswordVisibility() {
+    obscurePassword.value = !obscurePassword.value;
+  }
 
-  /* Future<void> signup() async {
-    if (!signupFormKey.currentState!.validate()) {
-      Fluttertoast.showToast(
-        msg: "Please fill all fields correctly",
-        textColor: Colors.white,
-      );
-      return;
-    }
+  Future<void> signup(BuildContext context) async {
+    final isValid = signupFormKey.currentState!.validate();
 
-    isLoading.value = true;
+    if (isValid) {
+      try {
+        isLoading.value = true;
+        await auth.createUserWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim(),
+        );
+        Navigator.pushReplacementNamed(context, '/bottomNav');
 
-    try {
-      final UserCredential userCredential =
-          await auth.createUserWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-      );
-
-      final User? user = userCredential.user;
-      if (user == null) {
-        throw Exception("User registration failed");
+        Fluttertoast.showToast(
+          msg: "Account created successfully!",
+          toastLength: Toast.LENGTH_SHORT,
+          textColor: Colors.white,
+          backgroundColor: Colors.green,
+        );
+      } catch (error) {
+        Fluttertoast.showToast(
+          msg: "Error: $error",
+          toastLength: Toast.LENGTH_SHORT,
+          textColor: Colors.white,
+          backgroundColor: Colors.red,
+        );
+      } finally {
+        isLoading.value = false;
       }
-
-      final String uid = user.uid;
-
-      await FirebaseFirestore.instance.collection("users").doc(uid).set({
-        'userId': uid,
-        'firstName': firstNameController.text.trim(),
-        'lastName': lastNameController.text.trim(),
-        'address': addressController.text.trim(),
-        'contactNumber': contactNumberController.text.trim(),
-        'email': emailController.text.trim().toLowerCase(),
-        'createdAt': Timestamp.now(),
-        'userWish': [],
-        'userCart': [],
-      });
-
-      Fluttertoast.showToast(
-        msg: "Account successfully created",
-        textColor: Colors.white,
-      );
-
-      Get.offNamed('/HomePage');
-    } on FirebaseAuthException catch (error) {
-      Fluttertoast.showToast(
-        msg: error.message ?? "An error occurred",
-        textColor: Colors.red,
-      );
-    } catch (error) {
-      Fluttertoast.showToast(
-        msg: error.toString(),
-        textColor: Colors.red,
-      );
-    } finally {
-      isLoading.value = false;
     }
-  } */
+  }
 }

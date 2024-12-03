@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "818755215981",
-    "project_id": "spareease-2e3b6",
-    "storage_bucket": "spareease-2e3b6.firebasestorage.app"
+    "project_number": "619342951022",
+    "project_id": "spareease1",
+    "storage_bucket": "spareease1.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:818755215981:android:747887f3c89f448f571564",
+        "mobilesdk_app_id": "1:619342951022:android:e8d20d31da7b08abaa2c7f",
         "android_client_info": {
           "package_name": "com.example.spare_ease"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBxT0ocJ9vPu07hO3PQTrSK4YTPBD4oqIg"
+          "current_key": "AIzaSyDec-uKQ7RymtllncZLiEwsHQXyVGfxTo4"
         }
       ],
       "services": {

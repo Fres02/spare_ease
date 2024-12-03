@@ -1,0 +1,10 @@
+<resources>
+    <string name="default_web_client_id" translatable="false">null</string>
+    <string name="firebase_database_url" translatable="false">null</string>
+    <string name="gcm_defaultSenderId" translatable="false">619342951022</string>
+    <string name="google_api_key" translatable="false">AIzaSyDec-uKQ7RymtllncZLiEwsHQXyVGfxTo4</string>
+    <string name="google_app_id" translatable="false">1:619342951022:android:e8d20d31da7b08abaa2c7f</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDec-uKQ7RymtllncZLiEwsHQXyVGfxTo4</string>
+    <string name="project_id" translatable="false">spareease1</string>
+    <string name="storage_bucket" translatable="false">spareease1.firebasestorage.app</string>
+</resources>

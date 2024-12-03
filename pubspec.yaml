@@ -52,6 +52,7 @@ dependencies:
   card_swiper: ^2.0.4
   ionicons: ^0.2.2
   uuid: ^4.4.2
+  dotted_border: ^2.1.0
 
 dev_dependencies:
   flutter_test:

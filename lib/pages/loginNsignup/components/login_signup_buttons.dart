@@ -130,13 +130,14 @@ class LoginButton extends StatelessWidget {
 }
 
 class SignupButton extends StatelessWidget {
-  final SignupController controller = Get.find<SignupController>();
   final GlobalKey<FormState> formKey;
 
   SignupButton({required this.formKey, super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<SignupController>();
+
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
@@ -158,7 +159,11 @@ class SignupButton extends StatelessWidget {
             color: Color.fromARGB(255, 255, 255, 255),
           ),
         ),
-        onPressed: () => controller.signup(context),
+        onPressed: () {
+          if (formKey.currentState!.validate()) {
+            controller.signup(context);
+          }
+        },
         child: controller.isLoading.value
             ? const CircularProgressIndicator(color: Colors.white)
             : const Text(

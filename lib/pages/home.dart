@@ -10,7 +10,7 @@ import 'package:spare_ease/components/app_constants.dart';
 import 'package:spare_ease/providers/products_provider.dart';
 
 class Home extends StatelessWidget {
-  static const routName = "/HomePage";
+  static const routeName = "/HomePage";
 
   const Home({super.key});
 

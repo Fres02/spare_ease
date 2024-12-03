@@ -23,29 +23,54 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) {
-          return ProductsProvider();
-        }),
-        ChangeNotifierProvider(create: (_) {
-          return CartProvider();
-        })
-      ],
-      child: MaterialApp(
-        home: const MyBottomNavigationBar(),
-        //home: const SplashScreen(),
-        routes: {
-          LoginPage.routeName: (context) => const LoginPage(),
-          SignupPage.routName: (context) => const SignupPage(),
-          ProductDetailsScreen.routeName: (context) =>
-              const ProductDetailsScreen(),
-          PlacedOrdersScreen.routeName: (context) => const PlacedOrdersScreen(),
-          ProfilePage.routeName: (context) => const ProfilePage(),
-          SearchPage.routeName: (context) => const SearchPage(),
-          '/bottomNav': (context) => MyBottomNavigationBar(),
-        },
-      ),
-    );
+    return FutureBuilder<FirebaseApp>(
+        future: Firebase.initializeApp(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: Scaffold(
+                body: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: Scaffold(
+                body: Center(
+                  child: SelectableText(snapshot.error.toString()),
+                ),
+              ),
+            );
+          }
+          return MultiProvider(
+            providers: [
+              ChangeNotifierProvider(create: (_) {
+                return ProductsProvider();
+              }),
+              ChangeNotifierProvider(create: (_) {
+                return CartProvider();
+              })
+            ],
+            child: MaterialApp(
+              //home: const MyBottomNavigationBar(),
+              home: const SplashScreen(),
+              routes: {
+                LoginPage.routeName: (context) => const LoginPage(),
+                SignupPage.routName: (context) => const SignupPage(),
+                ProductDetailsScreen.routeName: (context) =>
+                    const ProductDetailsScreen(),
+                PlacedOrdersScreen.routeName: (context) =>
+                    const PlacedOrdersScreen(),
+                ProfilePage.routeName: (context) => const ProfilePage(),
+                SearchPage.routeName: (context) => const SearchPage(),
+                '/bottomNav': (context) => MyBottomNavigationBar(),
+                Home.routeName: (context) => Home(),
+              },
+            ),
+          );
+        });
   }
 }
