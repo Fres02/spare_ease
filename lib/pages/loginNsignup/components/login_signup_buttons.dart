@@ -115,7 +115,11 @@ class LoginButton extends StatelessWidget {
             color: Color(0xFFF7C910),
           ),
         ),
-        onPressed: () => controller.login(formKey),
+        onPressed: () {
+          if (formKey.currentState!.validate()) {
+            controller.login(context);
+          }
+        },
         child: const Text(
           'Log In',
           style: TextStyle(

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:spare_ease/components/my_app_functions.dart';
 import 'package:spare_ease/pages/home.dart';
 
 class LoginController extends GetxController {
   static LoginController get instance => Get.find();
+  final loginFormKey = GlobalKey<FormState>();
 
   late final TextEditingController emailController;
   late final TextEditingController passwordController;
@@ -13,6 +16,9 @@ class LoginController extends GetxController {
   late final FocusNode passwordFocusNode;
 
   var isLoading = false.obs;
+  var obscurePassword = false.obs;
+
+  final auth = FirebaseAuth.instance;
 
   @override
   void onInit() {
@@ -36,8 +42,39 @@ class LoginController extends GetxController {
     super.onClose();
   }
 
-  Future<void> login(GlobalKey<FormState> formKey) async {
-    final isValid = formKey.currentState?.validate() ?? false;
+  Future<void> login(BuildContext context) async {
+    final isValid = loginFormKey.currentState!.validate();
+    FocusScope.of(context).unfocus();
+
+    if (isValid) {
+      try {
+        isLoading.value = true;
+
+        await auth.signInWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim(),
+        );
+        Fluttertoast.showToast(
+          msg: "Login Succeful",
+          textColor: Colors.white,
+        );
+        Navigator.pushReplacementNamed(context, '/bottomnev');
+      } on FirebaseException catch (error) {
+        await MyAppFunctions.showErrorOrWarningDialog(
+          context: context,
+          subtitle: error.message.toString(),
+          fct: () {},
+        );
+      } catch (error) {
+        await MyAppFunctions.showErrorOrWarningDialog(
+          context: context,
+          subtitle: error.toString(),
+          fct: () {},
+        );
+      } finally {
+        isLoading.value = false;
+      }
+    }
   }
 
 /*  Future<void> login(BuildContext context) async {
