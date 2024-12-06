@@ -50,7 +50,7 @@ class _SearchPageState extends State<SearchPage> {
           leading: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Image.asset(
-              AssetsManager.shoppingCart,
+              AssetsManager.logo,
             ),
           ),
           title: TitlesTextWidget(label: passedCategory ?? "Search products"),

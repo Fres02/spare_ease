@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:spare_ease/components/app_constants.dart';
+import 'package:spare_ease/components/assets_manager.dart';
 import 'package:spare_ease/components/my_app_functions.dart';
 import 'package:spare_ease/components/subtitle_text.dart';
 import 'package:spare_ease/components/title_text.dart';
@@ -134,64 +135,94 @@ class _SupportPageState extends State<SupportPage> {
       },
       child: Scaffold(
         bottomSheet: SizedBox(
-          height: kBottomNavigationBarHeight + 10,
+          height: kBottomNavigationBarHeight + 15,
           child: Material(
             color: Theme.of(context).scaffoldBackgroundColor,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+            child: Column(
               children: [
-                ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.all(12),
-                    backgroundColor: Colors.red,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        10,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.red,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10.0), // Reduced padding
+                          ),
+                          icon: const Icon(Icons.clear, color: Colors.white),
+                          label: const Text(
+                            "Clear",
+                            style: TextStyle(
+                              fontSize:
+                                  16, // Adjusted font size for consistency
+                              color: Colors.white,
+                            ),
+                          ),
+                          onPressed: () {
+                            clearForm();
+                          },
+                        ),
                       ),
                     ),
-                  ),
-                  icon: const Icon(Icons.clear),
-                  label: const Text(
-                    "Clear",
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                  onPressed: () {
-                    clearForm();
-                  },
-                ),
-                ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.all(12),
-                    // backgroundColor: Colors.red,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        10,
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10.0), // Reduced padding
+                          ),
+                          icon: const Icon(Icons.upload, color: Colors.white),
+                          label: Text(
+                            isEditing ? "Edit Product" : "Upload Product",
+                            style: const TextStyle(
+                              fontSize:
+                                  16, // Adjusted font size for consistency
+                              color: Colors.white,
+                            ),
+                          ),
+                          onPressed: () {
+                            if (isEditing) {
+                              _editProduct();
+                            } else {
+                              _uploadProduct();
+                            }
+                          },
+                        ),
                       ),
                     ),
-                  ),
-                  icon: const Icon(Icons.upload),
-                  label: Text(
-                    isEditing ? "Edit Product" : "Upload Product",
-                  ),
-                  onPressed: () {
-                    if (isEditing) {
-                      _editProduct();
-                    } else {
-                      _uploadProduct();
-                    }
-                  },
+                  ],
                 ),
+                const SizedBox(
+                  height: 10,
+                )
               ],
             ),
           ),
         ),
         appBar: AppBar(
-          centerTitle: true,
-          title: TitlesTextWidget(
-            label: isEditing ? "Edit Product" : "Upload a new product",
+          backgroundColor: Colors.amberAccent,
+          leading: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Image.asset(
+              AssetsManager.logo,
+            ),
           ),
+          title: const Text(
+            "Upload",
+            style: TextStyle(fontWeight: FontWeight.w500),
+          ),
+          centerTitle: true,
         ),
         body: SafeArea(
           child: SingleChildScrollView(
@@ -335,7 +366,7 @@ class _SupportPageState extends State<SupportPage> {
                               flex: 1,
                               child: TextFormField(
                                 controller: _priceController,
-                                key: const ValueKey('Price \$'),
+                                key: const ValueKey('Price \ LKR'),
                                 keyboardType: TextInputType.number,
                                 inputFormatters: <TextInputFormatter>[
                                   FilteringTextInputFormatter.allow(
@@ -345,7 +376,7 @@ class _SupportPageState extends State<SupportPage> {
                                 decoration: const InputDecoration(
                                     hintText: 'Price',
                                     prefix: SubtitleTextWidget(
-                                      label: "\$ ",
+                                      label: "\ LKR ",
                                       color: Colors.blue,
                                       fontSize: 16,
                                     )),
@@ -375,7 +406,7 @@ class _SupportPageState extends State<SupportPage> {
                                 validator: (value) {
                                   return MyValidators.uploadProdTexts(
                                     value: value,
-                                    toBeReturnedString: "Quantity is missed",
+                                    toBeReturnedString: "Add quantity",
                                   );
                                 },
                               ),
@@ -401,6 +432,9 @@ class _SupportPageState extends State<SupportPage> {
                           },
                           onTap: () {},
                         ),
+                        const SizedBox(
+                          height: 10,
+                        )
                       ],
                     ),
                   ),

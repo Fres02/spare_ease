@@ -53,17 +53,40 @@ class _OrdersWidgetFreeState extends State<OrdersWidgetFree> {
                           )),
                     ],
                   ),
-                  const Row(
+                  Row(
                     children: [
                       TitlesTextWidget(
                         label: 'Price:  ',
                         fontSize: 15,
                       ),
                       Flexible(
-                        child: SubtitleTextWidget(
-                          label: "11.99 \$",
-                          fontSize: 15,
-                          color: Colors.blue,
+                        flex: 1,
+                        child: RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: "LKR",
+                                style: TextStyle(
+                                  fontSize: 10, // Smaller font size
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.blue,
+                                ),
+                              ),
+                              WidgetSpan(
+                                child: SizedBox(
+                                    width:
+                                        2), // Space between "LKR" and the value
+                              ),
+                              TextSpan(
+                                text: "15000.00",
+                                style: TextStyle(
+                                  fontSize: 16, // Regular font size
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.blue,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],

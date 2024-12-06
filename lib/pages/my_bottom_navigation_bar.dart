@@ -149,7 +149,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
                 width: 30,
                 height: 30,
               ),
-              label: 'Support',
+              label: 'Upload',
             ),
             BottomNavigationBarItem(
               icon: Image.asset(

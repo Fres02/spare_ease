@@ -74,7 +74,7 @@ class AppConstants2 {
   }
 
   static List<DropdownMenuItem<String>>? get brandsDropDownList {
-    List<DropdownMenuItem<String>>? menuItem =
+    List<DropdownMenuItem<String>>? menu1Item =
         List<DropdownMenuItem<String>>.generate(
       brandsList.length,
       (index) => DropdownMenuItem(
@@ -82,6 +82,6 @@ class AppConstants2 {
         child: Text(brandsList[index]),
       ),
     );
-    return menuItem;
+    return menu1Item;
   }
 }

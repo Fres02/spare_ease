@@ -23,8 +23,15 @@ class _LoginPageState extends State<LoginPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   bool _obscureText = true;
   bool isLoading = false;
+  bool checkBoxValue = false;
 
   void _togglePasswordVisibility() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
+
+  void _toggleCheckBoxValue() {
     setState(() {
       _obscureText = !_obscureText;
     });
@@ -161,8 +168,12 @@ class _LoginPageState extends State<LoginPage> {
                             Row(
                               children: [
                                 Checkbox(
-                                  value: true,
-                                  onChanged: (value) {},
+                                  value: checkBoxValue,
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      checkBoxValue = newValue!;
+                                    });
+                                  },
                                 ),
                                 const Text(
                                   "Remember Me",

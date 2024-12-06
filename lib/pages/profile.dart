@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:spare_ease/components/assets_manager.dart';
 import 'package:spare_ease/components/my_app_functions.dart';
 import 'package:spare_ease/components/subtitle_text.dart';
 import 'package:spare_ease/components/title_text.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:spare_ease/pages/my_uploads.dart';
 import 'package:spare_ease/pages/onboarding_screen/onboarding_screen.dart';
 import 'package:spare_ease/pages/placed_orders.dart';
 
@@ -16,7 +18,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  bool isLoggedIn = true; // Simulating login status for demo
+  bool isLoggedIn = true;
+  User? user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,7 @@ class _ProfilePageState extends State<ProfilePage> {
         leading: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Image.asset(
-            AssetsManager.shoppingCart,
+            AssetsManager.logo,
           ),
         ),
         title: const Text(
@@ -58,9 +61,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
                       SizedBox(height: 10),
-                      TitlesTextWidget(label: "Hadi Kachmar"),
+                      TitlesTextWidget(label: "ABC"),
                       SizedBox(height: 6),
-                      SubtitleTextWidget(label: "Coding.with.hadi@gmail.com"),
+                      SubtitleTextWidget(label: "abc@gmail.com"),
                     ],
                   ),
                 ],
@@ -85,24 +88,23 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 CustomListTile(
-                  text: "Wishlist",
+                  text: "Products Uploaded",
                   imagePath: AssetsManager.wishlistSvg,
-                  function: () {
-                    // Implement functionality
-                  },
+                  function: () => Navigator.pushNamed(
+                    context,
+                    UploadedProductsScreen.routeName,
+                  ),
                 ),
                 CustomListTile(
                   text: "Viewed Recently",
                   imagePath: AssetsManager.recent,
-                  function: () {
-                    // Implement functionality
-                  },
+                  function: () {},
                 ),
                 CustomListTile(
                   text: "Address",
                   imagePath: AssetsManager.address,
                   function: () {
-                    // Implement functionality
+                    _showEditableAddressDialog(context);
                   },
                 ),
                 const SizedBox(height: 6),
@@ -121,30 +123,31 @@ class _ProfilePageState extends State<ProfilePage> {
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                 ),
-                icon: const Icon(Icons.logout),
-                label: const Text("Logout"),
+                icon: Icon(user == null ? Icons.login : Icons.logout),
+                label: Text(user == null ? "Login" : "Logout"),
                 onPressed: () async {
-                  await MyAppFunctions.showErrorOrWarningDialog(
-                    context: context,
-                    subtitle: "Are you sure you want to logout?",
-                    fct: () async {
-                      setState(() {
-                        isLoggedIn = false; // Simulate logout
-                      });
+                  if (user == null) {
+                    // Navigate to Onboarding Screen when Login is clicked
+                    Navigator.pushNamed(context, OnBoardingScreen.routeName);
+                  } else {
+                    // Show logout confirmation dialog
+                    await MyAppFunctions.showErrorOrWarningDialog(
+                      context: context,
+                      subtitle: "Are you sure you want to sign out?",
+                      fct: () async {
+                        // Perform logout
+                        await FirebaseAuth.instance.signOut();
 
-                      // Wait for a brief moment to allow state update before navigating
-                      await Future.delayed(const Duration(milliseconds: 300));
-
-                      // Push to the OnBoardingScreen and replace the current screen
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => OnBoardingScreen(),
-                        ),
-                      );
-                    },
-                    isError: false,
-                  );
+                        // Navigate to Onboarding Screen after logout
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          OnBoardingScreen.routeName,
+                          (route) => false, // Clear the navigation stack
+                        );
+                      },
+                      isError: false,
+                    );
+                  }
                 },
               ),
             ),
@@ -178,4 +181,44 @@ class CustomListTile extends StatelessWidget {
       trailing: const Icon(IconlyLight.arrowRight2),
     );
   }
+}
+
+void _showEditableAddressDialog(BuildContext context) {
+  TextEditingController addressController = TextEditingController();
+  addressController.text = "ABC, ABC Lane, ABC, 80000";
+
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text("Edit Address"),
+        content: TextField(
+          controller: addressController,
+          maxLines: 3,
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+            hintText: "Enter your address",
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text("Cancel"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              // Save the updated address logic
+              String updatedAddress = addressController.text;
+              // Example: Update the address in the state or database
+
+              Navigator.pop(context);
+            },
+            child: const Text("Save"),
+          ),
+        ],
+      );
+    },
+  );
 }

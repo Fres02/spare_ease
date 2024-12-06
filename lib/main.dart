@@ -4,6 +4,8 @@ import 'package:spare_ease/pages/home.dart';
 import 'package:spare_ease/pages/loginNsignup/login.dart';
 import 'package:spare_ease/pages/loginNsignup/signup.dart';
 import 'package:spare_ease/pages/my_bottom_navigation_bar.dart';
+import 'package:spare_ease/pages/my_uploads.dart';
+import 'package:spare_ease/pages/onboarding_screen/onboarding_screen.dart';
 import 'package:spare_ease/pages/placed_orders.dart';
 import 'package:spare_ease/pages/product_details.dart';
 import 'package:spare_ease/providers/cart_provider.dart';
@@ -15,6 +17,8 @@ import 'package:spare_ease/pages/search.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  debugPrint = (String? message, {int? wrapWidth}) {};
+
   runApp(const MyApp());
 }
 
@@ -68,6 +72,10 @@ class MyApp extends StatelessWidget {
                 SearchPage.routeName: (context) => const SearchPage(),
                 '/bottomNav': (context) => MyBottomNavigationBar(),
                 Home.routeName: (context) => Home(),
+                OnBoardingScreen.routeName: (context) =>
+                    const OnBoardingScreen(),
+                UploadedProductsScreen.routeName: (context) =>
+                    const UploadedProductsScreen(),
               },
             ),
           );

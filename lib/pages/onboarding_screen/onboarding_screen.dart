@@ -8,6 +8,7 @@ import 'package:spare_ease/pages/onboarding_screen/intro2.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
+  static const routeName = '/OnBoardingScreen';
 
   @override
   _OnBoardingScreenState createState() => _OnBoardingScreenState();
