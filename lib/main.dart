@@ -10,6 +10,7 @@ import 'package:spare_ease/pages/placed_orders.dart';
 import 'package:spare_ease/pages/product_details.dart';
 import 'package:spare_ease/providers/cart_provider.dart';
 import 'package:spare_ease/providers/products_provider.dart';
+import 'package:spare_ease/providers/user_provider.dart';
 import 'package:spare_ease/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:spare_ease/pages/profile.dart';
@@ -51,12 +52,21 @@ class MyApp extends StatelessWidget {
           }
           return MultiProvider(
             providers: [
-              ChangeNotifierProvider(create: (_) {
-                return ProductsProvider();
-              }),
-              ChangeNotifierProvider(create: (_) {
-                return CartProvider();
-              })
+              ChangeNotifierProvider(
+                create: (_) {
+                  return ProductsProvider();
+                },
+              ),
+              ChangeNotifierProvider(
+                create: (_) {
+                  return CartProvider();
+                },
+              ),
+              ChangeNotifierProvider(
+                create: (_) {
+                  return UserProvider();
+                },
+              ),
             ],
             child: MaterialApp(
               //home: const MyBottomNavigationBar(),

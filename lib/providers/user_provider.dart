@@ -16,10 +16,10 @@ class UserProvider with ChangeNotifier {
     if (user == null) {
       return null;
     }
-    String uid = user.uid;
+    String userId = user.uid;
     try {
       final userDoc =
-          await FirebaseFirestore.instance.collection("users").doc(uid).get();
+          await FirebaseFirestore.instance.collection("user").doc(userId).get();
 
       final userDocDict = userDoc.data();
       userModel = UserModel(

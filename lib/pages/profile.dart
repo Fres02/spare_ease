@@ -25,6 +25,7 @@ class _ProfilePageState extends State<ProfilePage> {
   User? user = FirebaseAuth.instance.currentUser;
   UserModel? userModel;
   bool _isLoading = true;
+
   Future<void> fetchUserInfo() async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     try {
@@ -43,6 +44,12 @@ class _ProfilePageState extends State<ProfilePage> {
         _isLoading = false;
       });
     }
+  }
+
+  @override
+  void initState() {
+    fetchUserInfo();
+    super.initState();
   }
 
   @override
@@ -66,7 +73,7 @@ class _ProfilePageState extends State<ProfilePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Visibility(
-            visible: !isLoggedIn,
+            visible: user == null ? true : false,
             child: Padding(
               padding: EdgeInsets.all(18.0),
               child: TitlesTextWidget(
@@ -74,26 +81,33 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
           ),
-          Visibility(
-            visible: isLoggedIn,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              child: Row(
-                children: [
-                  SizedBox(width: 10),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+          userModel == null
+              ? const SizedBox.shrink()
+              : Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  child: Row(
                     children: [
-                      SizedBox(height: 10),
-                      TitlesTextWidget(label: userModel!.firstName),
-                      SizedBox(height: 6),
-                      SubtitleTextWidget(label: userModel!.email),
+                      SizedBox(width: 10),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 10),
+                          TitlesTextWidget(
+                            label: userModel == null
+                                ? "Loading..."
+                                : "${userModel!.firstName} ${userModel!.lastName}",
+                          ),
+                          SizedBox(height: 6),
+                          SubtitleTextWidget(
+                            label: userModel == null
+                                ? "Loading..."
+                                : "${userModel!.email}",
+                          ),
+                        ],
+                      ),
                     ],
                   ),
-                ],
-              ),
-            ),
-          ),
+                ),
           const SizedBox(height: 15),
           Padding(
             padding: const EdgeInsets.all(14.0),
