@@ -1,13 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:spare_ease/components/assets_manager.dart';
 import 'package:spare_ease/components/my_app_functions.dart';
 import 'package:spare_ease/components/subtitle_text.dart';
 import 'package:spare_ease/components/title_text.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:spare_ease/models/user_model.dart';
 import 'package:spare_ease/pages/my_uploads.dart';
 import 'package:spare_ease/pages/onboarding_screen/onboarding_screen.dart';
 import 'package:spare_ease/pages/placed_orders.dart';
+import 'package:spare_ease/providers/user_provider.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -20,6 +23,27 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   bool isLoggedIn = true;
   User? user = FirebaseAuth.instance.currentUser;
+  UserModel? userModel;
+  bool _isLoading = true;
+  Future<void> fetchUserInfo() async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    try {
+      setState(() {
+        _isLoading = true;
+      });
+      userModel = await userProvider.fetchUserInfo();
+    } catch (error) {
+      await MyAppFunctions.showErrorOrWarningDialog(
+        context: context,
+        subtitle: error.toString(),
+        fct: () {},
+      );
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +67,7 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           Visibility(
             visible: !isLoggedIn,
-            child: const Padding(
+            child: Padding(
               padding: EdgeInsets.all(18.0),
               child: TitlesTextWidget(
                 label: "Please login to have unlimited access",
@@ -53,17 +77,17 @@ class _ProfilePageState extends State<ProfilePage> {
           Visibility(
             visible: isLoggedIn,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               child: Row(
                 children: [
-                  const SizedBox(width: 10),
+                  SizedBox(width: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       SizedBox(height: 10),
-                      TitlesTextWidget(label: "ABC"),
+                      TitlesTextWidget(label: userModel!.firstName),
                       SizedBox(height: 6),
-                      SubtitleTextWidget(label: "abc@gmail.com"),
+                      SubtitleTextWidget(label: userModel!.email),
                     ],
                   ),
                 ],
@@ -96,11 +120,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 CustomListTile(
-                  text: "Viewed Recently",
-                  imagePath: AssetsManager.recent,
-                  function: () {},
-                ),
-                CustomListTile(
                   text: "Address",
                   imagePath: AssetsManager.address,
                   function: () {
@@ -127,22 +146,17 @@ class _ProfilePageState extends State<ProfilePage> {
                 label: Text(user == null ? "Login" : "Logout"),
                 onPressed: () async {
                   if (user == null) {
-                    // Navigate to Onboarding Screen when Login is clicked
                     Navigator.pushNamed(context, OnBoardingScreen.routeName);
                   } else {
-                    // Show logout confirmation dialog
                     await MyAppFunctions.showErrorOrWarningDialog(
                       context: context,
                       subtitle: "Are you sure you want to sign out?",
                       fct: () async {
-                        // Perform logout
                         await FirebaseAuth.instance.signOut();
-
-                        // Navigate to Onboarding Screen after logout
                         Navigator.pushNamedAndRemoveUntil(
                           context,
                           OnBoardingScreen.routeName,
-                          (route) => false, // Clear the navigation stack
+                          (route) => false,
                         );
                       },
                       isError: false,
